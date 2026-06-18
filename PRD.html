@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VolfPack — Product Requirements Document</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --background: #FFFDF9;
+    --foreground: #4A4458;
+    --card: #FFFFFF;
+    --muted: #F6F1FA;
+    --muted-fg: #8B8398;
+    --primary: #A78BFA;
+    --primary-soft: #C9B8F5;
+    --accent: #FFD6E8;
+    --pink: #FFB3D1;
+    --mint: #A8E6CF;
+    --peach: #FFD9B3;
+    --sky: #BFE3FF;
+    --border: #EFE7F2;
+    --radius: 1.25rem;
+    --shadow-cute: 0 10px 30px -12px rgba(167, 139, 250, 0.35), 0 4px 12px -6px rgba(167, 139, 250, 0.15);
+    --font-heading: "Baloo 2", system-ui, sans-serif;
+    --font-sans: "Quicksand", system-ui, sans-serif;
+    --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    color: var(--foreground);
+    background: var(--background);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* soft blurred pastel blobs behind content */
+  .blob {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.35;
+    z-index: -10;
+    pointer-events: none;
+  }
+  .blob-1 { top: -120px; left: -80px; width: 420px; height: 420px; background: var(--primary-soft); }
+  .blob-2 { top: 30%; right: -120px; width: 380px; height: 380px; background: var(--pink); }
+  .blob-3 { bottom: -100px; left: 20%; width: 460px; height: 460px; background: var(--sky); }
+
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 1.25rem; }
+
+  /* ---------- Hero ---------- */
+  header.hero {
+    text-align: center;
+    padding: 4.5rem 1.25rem 2.5rem;
+  }
+  .eyebrow {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--primary);
+    background: var(--muted);
+    padding: 0.4rem 1rem;
+    border-radius: 999px;
+    margin-bottom: 1.25rem;
+  }
+  h1 {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: clamp(2.4rem, 6vw, 3.6rem);
+    letter-spacing: -0.02em;
+    margin: 0 0 0.75rem;
+    text-wrap: balance;
+    background: linear-gradient(120deg, var(--primary) 0%, var(--pink) 70%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .lede {
+    font-size: 1.15rem;
+    max-width: 42rem;
+    margin: 0 auto 1.75rem;
+    color: var(--foreground);
+  }
+  .meta-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+  .chip {
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-cute);
+  }
+  .chip.lav { background: var(--muted); color: var(--primary); }
+  .chip.pink { background: var(--accent); }
+  .chip.mint { background: var(--mint); }
+  .chip.peach { background: var(--peach); }
+
+  /* ---------- Table of contents ---------- */
+  nav.toc {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-cute);
+    padding: 1.5rem 1.75rem;
+    margin: 2rem 0 3rem;
+  }
+  nav.toc h2 {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    margin: 0 0 0.75rem;
+  }
+  nav.toc ol {
+    columns: 2;
+    column-gap: 2rem;
+    margin: 0; padding-left: 1.1rem;
+    font-size: 0.95rem;
+  }
+  nav.toc a { color: var(--foreground); text-decoration: none; }
+  nav.toc a:hover { color: var(--primary); }
+
+  /* ---------- Sections ---------- */
+  section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-cute);
+    padding: 2rem 2.25rem;
+    margin-bottom: 1.75rem;
+    scroll-margin-top: 1.5rem;
+  }
+  section.flag {
+    border: 2px solid var(--primary-soft);
+    background: linear-gradient(180deg, #FBF8FF 0%, var(--card) 60%);
+  }
+  section.danger {
+    border: 2px solid var(--pink);
+    background: linear-gradient(180deg, #FFF4F8 0%, var(--card) 60%);
+  }
+  .warn-box {
+    background: #FFF0F5;
+    border: 1px solid var(--pink);
+    border-left: 4px solid #e0608f;
+    border-radius: 0 1rem 1rem 0;
+    padding: 0.9rem 1.25rem;
+    margin: 1rem 0;
+  }
+
+  h2.sec {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.6rem;
+    letter-spacing: -0.01em;
+    margin: 0 0 1rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+  }
+  h2.sec .num {
+    font-size: 1rem;
+    color: var(--primary);
+    background: var(--muted);
+    border-radius: 999px;
+    padding: 0.15rem 0.7rem;
+  }
+  h3 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.15rem;
+    margin: 1.5rem 0 0.5rem;
+  }
+  p { margin: 0.6rem 0; }
+  ul, ol { padding-left: 1.4rem; }
+  li { margin: 0.3rem 0; }
+
+  blockquote {
+    margin: 1rem 0;
+    padding: 0.9rem 1.25rem;
+    background: var(--muted);
+    border-left: 4px solid var(--primary-soft);
+    border-radius: 0 1rem 1rem 0;
+    font-style: italic;
+  }
+  blockquote strong { font-style: normal; }
+
+  strong { color: #3a3447; font-weight: 700; }
+
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    background: var(--muted);
+    padding: 0.12em 0.42em;
+    border-radius: 0.45rem;
+    color: #6b5fa8;
+  }
+  pre {
+    background: #2b2538;
+    color: #e8e2f5;
+    border-radius: 1rem;
+    padding: 1.1rem 1.25rem;
+    overflow-x: auto;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    line-height: 1.5;
+    box-shadow: var(--shadow-cute);
+  }
+  pre code { background: none; color: inherit; padding: 0; }
+
+  /* ---------- Tables ---------- */
+  .tbl-scroll { overflow-x: auto; margin: 1rem 0; }
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 0.9rem;
+    min-width: 520px;
+  }
+  th, td {
+    text-align: left;
+    padding: 0.65rem 0.85rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  thead th {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--primary);
+    background: var(--muted);
+    border-bottom: none;
+  }
+  thead th:first-child { border-top-left-radius: 0.75rem; }
+  thead th:last-child { border-top-right-radius: 0.75rem; }
+  tbody tr:hover { background: #FBF9FE; }
+
+  /* priority + status pills */
+  .pill {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.1rem 0.55rem;
+    border-radius: 999px;
+    font-family: var(--font-heading);
+  }
+  .p0 { background: var(--pink); color: #8a2b53; }
+  .p1 { background: var(--peach); color: #8a5a23; }
+  .p2 { background: var(--sky); color: #2a5a7a; }
+  .yes { color: #2e8b6b; font-weight: 700; }
+  .no { color: #c25b7d; font-weight: 700; }
+
+  /* ---------- Footer ---------- */
+  footer {
+    text-align: center;
+    padding: 2.5rem 1.25rem 4rem;
+    color: var(--muted-fg);
+    font-size: 0.9rem;
+  }
+  footer a { color: var(--primary); text-decoration: none; }
+
+  /* ---------- Print ---------- */
+  @media print {
+    .blob { display: none; }
+    body { background: #fff; }
+    section, nav.toc { box-shadow: none; border: 1px solid #ddd; break-inside: avoid; }
+    nav.toc { display: none; }
+    h1 { -webkit-text-fill-color: #7a5fc8; color: #7a5fc8; }
+    a { color: inherit; text-decoration: none; }
+    pre { background: #f4f2f8; color: #2b2538; }
+  }
+
+  @media (max-width: 640px) {
+    nav.toc ol { columns: 1; }
+    section { padding: 1.5rem 1.25rem; }
+  }
+</style>
+</head>
+<body>
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <header class="hero">
+    <span class="eyebrow">Product Requirements Document</span>
+    <h1>VolfPack</h1>
+    <p class="lede">
+      Open-source, self-hostable <strong>text-to-video studio</strong> that runs on
+      <em>your</em> keys — bring any LLM provider for scripting and any video-model
+      provider for rendering.
+    </p>
+    <div class="meta-chips">
+      <span class="chip lav">Draft v1</span>
+      <span class="chip">Updated 2026-06-18</span>
+      <span class="chip pink">Next.js + Python</span>
+      <span class="chip mint">BYO-key</span>
+      <span class="chip peach">MIT / Open-core</span>
+    </div>
+  </header>
+
+  <div class="wrap">
+
+    <nav class="toc">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#s1">Vision &amp; problem</a></li>
+        <li><a href="#s2">Target users &amp; personas</a></li>
+        <li><a href="#s3">Goals, scope &amp; non-goals</a></li>
+        <li><a href="#s4">Central architecture: keys &amp; providers</a></li>
+        <li><a href="#s45">What we provide / not a wrapper</a></li>
+        <li><a href="#s46">The actual tech moat</a></li>
+        <li><a href="#s5">Functional requirements</a></li>
+        <li><a href="#s6">Non-functional requirements</a></li>
+        <li><a href="#s7">System architecture</a></li>
+        <li><a href="#s8">Data model</a></li>
+        <li><a href="#s9">API contracts</a></li>
+        <li><a href="#s10">Competitive benchmarking</a></li>
+        <li><a href="#s11">Open-source &amp; distribution</a></li>
+        <li><a href="#s12">Monetization</a></li>
+        <li><a href="#s13">Metrics &amp; KPIs</a></li>
+        <li><a href="#s14">Risks &amp; mitigations</a></li>
+        <li><a href="#s145">Why this might fail</a></li>
+        <li><a href="#s15">Roadmap &amp; milestones</a></li>
+        <li><a href="#s16">Open questions</a></li>
+      </ol>
+    </nav>
+
+    <!-- 1 -->
+    <section id="s1">
+      <h2 class="sec"><span class="num">1</span> Vision &amp; problem</h2>
+      <h3>The problem</h3>
+      <p>Text-to-video is exploding, but the tooling is <strong>closed, expensive, and lock-in heavy</strong>. Runway, Pika, Luma, Sora, and Kling are all proprietary SaaS: your prompts, assets, and spend live on someone else's platform, metered at their margin. Developers and technical creators who want to use their <strong>own</strong> provider keys, <strong>self-host</strong> for privacy/cost, <strong>swap models</strong> as the frontier moves, and <strong>build on top</strong> of a hackable codebase have no good open-source home. VolfPack is that home.</p>
+      <h3>The vision</h3>
+      <blockquote><strong>The open-source control plane for text-to-video.</strong> Describe a scene, pick a model, generate — on infrastructure and keys you control. One studio UI, every video model behind one contract.</blockquote>
+      <h3>Why now</h3>
+      <ul>
+        <li>Frontier video models expose stable HTTP APIs (Runway Gen-3/4, Luma, Pika, Veo, Kling, Sora).</li>
+        <li>Open-weight video models are viable to self-host (Mochi-1, LTX-Video, HunyuanVideo, Wan 2.x) on a single high-VRAM GPU or via Replicate/Fal.</li>
+        <li>"BYO-key" + "open-core" is a proven OSS business pattern.</li>
+      </ul>
+    </section>
+
+    <!-- 2 -->
+    <section id="s2">
+      <h2 class="sec"><span class="num">2</span> Target users &amp; personas</h2>
+      <p>For v1, the <strong>primary audience is developers who self-host and bring their own keys.</strong> Monetization (managed hosting) comes later.</p>
+      <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Persona</th><th>Description</th><th>Core need</th><th>Priority</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Hacker Dev</strong> (primary)</td><td>Indie/startup dev self-hosting a text-to-video tool, wiring own keys</td><td>Clean codebase, one-command deploy, BYO-key, model swap</td><td><span class="pill p0">P0</span></td></tr>
+          <tr><td><strong>Builder / Integrator</strong></td><td>Wants VolfPack as a component in their own product</td><td>Stable API, headless mode, webhooks</td><td><span class="pill p1">P1</span></td></tr>
+          <tr><td><strong>Technical Creator</strong></td><td>Comfortable with <code>.env</code> + Docker; wants a private studio</td><td>Good UX, history, styles/ratios</td><td><span class="pill p1">P1</span></td></tr>
+          <tr><td><strong>Self-host Ops</strong></td><td>Runs it for a team behind their firewall</td><td>Auth, multi-user, key mgmt, observability</td><td><span class="pill p2">P2</span></td></tr>
+          <tr><td><strong>Managed-tier Customer</strong></td><td>(Future) Won't run infra; pays for hosted</td><td>Zero-setup, billing, SLA</td><td><span class="pill p2">P3+</span></td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p><strong>Non-users (out of scope v1):</strong> non-technical consumers wanting a polished zero-config mobile app. We are developer-first OSS first.</p>
+    </section>
+
+    <!-- 3 -->
+    <section id="s3">
+      <h2 class="sec"><span class="num">3</span> Goals, scope &amp; non-goals</h2>
+      <h3>v1 Goals</h3>
+      <ol>
+        <li>A self-hostable studio: marketing site + Studio UI + Python backend.</li>
+        <li><strong>Provider-agnostic generation</strong> across ≥3 video + ≥3 LLM providers.</li>
+        <li><strong>BYO-key</strong> default; <strong>optional managed keys</strong> designed-in.</li>
+        <li>Async job lifecycle with progress, history, asset storage.</li>
+        <li>One-command local run (<code>docker compose up</code>) + documented deploy.</li>
+      </ol>
+      <h3>Out of scope for v1</h3>
+      <p>Video editing/timeline, audio/voiceover, mobile native, fine-tuning, real-time collab, billing/payments (designed-for, not built).</p>
+      <h3>Non-goals (philosophy)</h3>
+      <ul>
+        <li>We are <strong>not</strong> a model lab — we don't train video models.</li>
+        <li>We are <strong>not</strong> a key-reseller — BYO-key is first-class; managed is opt-in.</li>
+        <li>We won't add a loud second brand color (per <code>design.md</code>). 🙂</li>
+      </ul>
+    </section>
+
+    <!-- 4 -->
+    <section id="s4" class="flag">
+      <h2 class="sec"><span class="num">4</span> ⚑ Central decision — keys &amp; providers</h2>
+      <blockquote><strong>This is the most important section. Everything downstream depends on it.</strong></blockquote>
+      <p>The headline "works on any LLM key" is <em>technically incomplete</em>. <strong>LLM provider keys (OpenAI, Anthropic, Gemini, …) do not generate video.</strong> Video pixels come from <strong>video-model providers</strong>. VolfPack therefore has <strong>two distinct provider classes</strong> behind <strong>one abstraction</strong>:</p>
+      <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Class</th><th>Purpose</th><th>Example providers</th></tr></thead>
+        <tbody>
+          <tr><td><strong>LLM providers</strong></td><td>Prompt enhancement, scene scripting, storyboard text, moderation, captions/SEO</td><td>OpenAI, Anthropic, Gemini, Mistral, Groq, Ollama (local)</td></tr>
+          <tr><td><strong>Video providers</strong></td><td>The actual text/image-to-video render</td><td>Runway, Luma, Pika, Veo, Kling, Replicate/Fal (Mochi, LTX-Video, Hunyuan, Wan)</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p>A single generation may use <strong>both</strong>: LLM expands the prompt → video provider renders it.</p>
+      <h3>Provider abstraction</h3>
+      <ul>
+        <li><code>VideoProvider</code> interface: <code>submit</code>, <code>poll</code>, <code>cancel</code>, <code>capabilities()</code>.</li>
+        <li><code>LLMProvider</code> via <strong>LiteLLM</strong> (one API, ~100 providers, BYO-key).</li>
+        <li><strong>Registry/router</strong>: maps model id (e.g. <code>runway:gen3a_turbo</code>) → adapter, validates capabilities, routes, supports fallback chains.</li>
+      </ul>
+      <h3>Key handling modes (both designed-in)</h3>
+      <ol>
+        <li><strong>BYO-key (default, self-host):</strong> keys in server <code>.env</code> or, multi-user, <strong>encrypted per user/org</strong> (envelope encryption). Calls server-side; keys never touch the browser.</li>
+        <li><strong>Managed (optional, hosted):</strong> VolfPack keys, metered for billing. Flag-gated, off by default.</li>
+      </ol>
+      <blockquote><strong>Principle:</strong> the request/response contract is identical regardless of key mode. Key mode is a deployment concern, not a product surface.</blockquote>
+
+      <h3>4.4 Local / on-device generation (no keys, no cloud)</h3>
+      <p>A <strong>third provider category</strong> sits alongside cloud video: <strong>local open-weight models on the user's own GPU</strong> — no API key, no per-call cost, fully private. A first-class path for self-hosters who never want to call an external API. Local is just another <code>VideoProvider</code>; the contract is unchanged.</p>
+      <ul>
+        <li><strong><code>ComfyUIProvider</code> (recommended):</strong> user runs <a href="https://github.com/comfyanonymous/ComfyUI">ComfyUI</a> (the de-facto OSS local video engine); VolfPack talks to its HTTP API + websocket for progress. ComfyUI owns GPU/VRAM/downloads. Supports LTX-Video, Mochi-1, HunyuanVideo, Wan 2.x, AnimateDiff.</li>
+        <li><strong><code>DiffusersProvider</code> (self-contained):</strong> a Python worker loads models via 🤗 <code>diffusers</code> directly — CUDA on NVIDIA, <strong>MPS on Apple Silicon</strong>, CPU fallback. More integrated, heavier to maintain — ship after ComfyUI.</li>
+      </ul>
+      <p><strong>VRAM-aware gating:</strong> each local model declares its memory need; VolfPack detects host VRAM/unified memory and <strong>enables / warns / disables</strong> each model — no silent OOM on weak hardware, everything unlocked on strong hardware.</p>
+      <div class="tbl-scroll"><table>
+        <thead><tr><th>Available VRAM / unified memory</th><th>Realistically runnable locally</th></tr></thead>
+        <tbody>
+          <tr><td><strong>~8 GB</strong> (M1 Air, GTX 1070)</td><td>AnimateDiff only (short, low-res). <strong>Recommend cloud/API instead.</strong></td></tr>
+          <tr><td><strong>12–16 GB</strong> (RTX 3060/4060Ti, M2/M3 16GB)</td><td><strong>LTX-Video</strong> (fast), AnimateDiff — the local sweet spot</td></tr>
+          <tr><td><strong>24 GB</strong> (RTX 3090/4090, M-series 32GB+)</td><td>+ Mochi-1, quantized HunyuanVideo / Wan</td></tr>
+          <tr><td><strong>40 GB+</strong> (A100/H100, multi-GPU)</td><td>Everything, full quality</td></tr>
+        </tbody>
+      </table></div>
+      <blockquote><strong>Honest constraint:</strong> local is <strong>VRAM-bound and slower</strong> than cloud APIs (open models are CUDA-tuned; Apple MPS lags). Local is a <em>privacy/cost</em> win, not a <em>speed/quality</em> win — the UI sets that expectation. <strong>Stance:</strong> VolfPack ships the capability; whether a model runs depends on the user's hardware — exactly the Open WebUI / ComfyUI pattern.</blockquote>
+    </section>
+
+    <!-- 4.5 -->
+    <section id="s45" class="flag">
+      <h2 class="sec"><span class="num">4.5</span> What we provide — not an LLM wrapper</h2>
+      <blockquote>A fair challenge for any AI product: <em>"Isn't this just a thin UI over someone else's API?"</em> This section answers it head-on — if VolfPack were deleted, what would users lose that they couldn't rebuild with a <code>fetch()</code>?</blockquote>
+      <h3>What VolfPack actually provides</h3>
+      <div class="tbl-scroll"><table>
+        <thead><tr><th>#</th><th>We provide</th><th>Why it's real work, not a wrapper</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><strong>Provider-agnostic abstraction</strong> over cloud APIs <em>and</em> local models</td><td>Every provider has a different request shape, polling model, capabilities, error format. We unify ~8+ that disagree; a wrapper hits one.</td></tr>
+          <tr><td>2</td><td><strong>Capability registry + validation</strong></td><td>We reject impossible requests (duration/ratio/res/VRAM) <em>before</em> spending money/time. A wrapper just forwards and lets the provider 400.</td></tr>
+          <tr><td>3</td><td><strong>Durable async job orchestration</strong></td><td>Queue, workers, at-least-once + idempotent submit, progress, restart-survival. A real distributed-systems problem, not an API call.</td></tr>
+          <tr><td>4</td><td><strong>Local/on-device generation</strong> (§4.4)</td><td>ComfyUI/Diffusers + VRAM gating. There is <em>no API to wrap</em> — it runs on the user's own GPU.</td></tr>
+          <tr><td>5</td><td><strong>Self-hostable, private deployment</strong></td><td>Your infra, keys, data. A wrapper's whole value (convenience) is the opposite of this.</td></tr>
+          <tr><td>6</td><td><strong>Secure multi-tenant key custody</strong></td><td>Envelope-encrypted per-user keys, never logged/returned/browser-exposed. A wrapper has no key-mgmt problem.</td></tr>
+          <tr><td>7</td><td><strong>Fallback chains + routing</strong></td><td>Provider down → auto-retry on fallback; route by cost/speed/quality across providers.</td></tr>
+          <tr><td>8</td><td><strong>Cost attribution &amp; metering</strong></td><td>Per-job cost across heterogeneous units (seconds vs tokens vs credits), budget caps, transparency.</td></tr>
+          <tr><td>9</td><td><strong>Open, hackable adapter SDK</strong></td><td>~100-line pattern to add any model. Community extends VolfPack; you can't extend a closed wrapper.</td></tr>
+          <tr><td>10</td><td><strong>Persistent studio</strong>: history, re-open, variations, storyboard, asset lifecycle</td><td>State + workflow the providers don't give — they're stateless render endpoints.</td></tr>
+          <tr><td>11</td><td><strong>Real product UX + design system</strong></td><td>Studio, marketing, accessibility, brand. A product surface, not a Postman collection.</td></tr>
+        </tbody>
+      </table></div>
+      <h3>The anti-wrapper test</h3>
+      <p>A thin wrapper has <strong>all</strong> of these; VolfPack has <strong>none</strong>:</p>
+      <div class="tbl-scroll"><table>
+        <thead><tr><th>Thin wrapper</th><th>VolfPack</th></tr></thead>
+        <tbody>
+          <tr><td class="no">✗ Wraps exactly one provider</td><td class="yes">✓ Abstracts many (cloud + local)</td></tr>
+          <tr><td class="no">✗ Stateless pass-through</td><td class="yes">✓ Owns jobs, history, assets, retries</td></tr>
+          <tr><td class="no">✗ No logic between user and model</td><td class="yes">✓ Validates, enhances, moderates, routes, attributes cost</td></tr>
+          <tr><td class="no">✗ Breaks when the provider changes</td><td class="yes">✓ Isolated adapters + contract tests absorb churn</td></tr>
+          <tr><td class="no">✗ Must use their infra/keys</td><td class="yes">✓ Self-host, BYO-key, or fully local</td></tr>
+          <tr><td class="no">✗ Closed; you adapt to it</td><td class="yes">✓ MIT + adapter SDK; it adapts to you</td></tr>
+        </tbody>
+      </table></div>
+      <h3>The defensible moat (be honest — see §4.6)</h3>
+      <blockquote><strong>Blunt truth:</strong> most of the table above is <em>features</em>, not <em>moats</em>. Abstraction, queues, the UI, capability registries — all good engineering, but a competent team <strong>copies them in weeks</strong>, and our MIT license makes the code copyable by definition. Code is not a moat.</blockquote>
+      <p>The one durable, <em>technical</em> moat is the <strong>orchestration intelligence layer</strong> (§4.6): smart routing, per-model prompt translation, cross-shot consistency, and quality scoring that <strong>compound with usage data we accumulate and a late-arriving competitor cannot</strong>. Everything else is a feature; this is the moat.</p>
+      <blockquote><strong>One-line framing:</strong> A wrapper makes <em>one</em> model easier to call. VolfPack makes <em>every</em> model work the same way — and over time, makes them work <em>better</em> than calling them directly, by learning which model + which prompt gives the best result.</blockquote>
+    </section>
+
+    <!-- 4.6 -->
+    <section id="s46" class="flag">
+      <h2 class="sec"><span class="num">4.6</span> The actual tech moat — orchestration intelligence</h2>
+      <blockquote>The honest answer to <em>"what's the defensible technology?"</em> It is <strong>not</strong> the abstraction layer (copyable) — it's the intelligence on top of it that <strong>compounds with data</strong>.</blockquote>
+      <h3>Why this is defensible when abstraction isn't</h3>
+      <div class="tbl-scroll"><table>
+        <thead><tr><th></th><th>Provider abstraction <span class="no">(not a moat)</span></th><th>Orchestration intelligence <span class="yes">(the moat)</span></th></tr></thead>
+        <tbody>
+          <tr><td><strong>Nature</strong></td><td>One-time engineering cost</td><td>Compounding data + R&amp;D asset</td></tr>
+          <tr><td><strong>Copyable?</strong></td><td class="no">Yes — reimplement in weeks</td><td class="yes">No — code ≠ accumulated routing data</td></tr>
+          <tr><td><strong>Improves with usage?</strong></td><td class="no">No, static</td><td class="yes">Yes — every generation gets smarter</td></tr>
+          <tr><td><strong>Late competitor</strong></td><td>Catches up fast</td><td class="yes">Permanently behind on data</td></tr>
+        </tbody>
+      </table></div>
+      <h3>The four intelligence layers (build order)</h3>
+      <ol>
+        <li><strong>Per-model prompt translation.</strong> Each model wants different phrasing; we learn (LLM-assisted + empirical) to rewrite one intent into the optimal prompt per model. Earned in data, not code.</li>
+        <li><strong>Cost / quality / speed routing.</strong> Given prompt + budget + deadline, pick the best model — and learn from outcomes which wins for which request.</li>
+        <li><strong>Quality scoring + auto-retry.</strong> Score outputs (heuristics → learned → optional LLM-as-judge), retry low scores elsewhere. Builds the labeled dataset powering layers 1–2.</li>
+        <li><strong>Cross-shot consistency.</strong> Stable character/style across clips (seed lock, reference conditioning, latent reuse, LLM-anchored continuity) — a genuinely <em>unsolved</em> hard problem.</li>
+      </ol>
+      <h3>The compounding-data flywheel</h3>
+      <pre><code>more users → more generations → more (prompt, model, result, score) data
+   → smarter routing + prompt translation + consistency
+   → better results than calling the provider directly
+   → more users  ↺</code></pre>
+      <p>The moat is the <strong>flywheel</strong>, not any single algorithm. A competitor forking our MIT code on day 1 still starts with <strong>zero</strong> outcome data; we start with all of ours. The gap widens with every generation.</p>
+      <h3>Honest caveat (don't overclaim)</h3>
+      <blockquote>This moat <strong>does not exist at launch.</strong> v1 ships the <em>architecture</em> (routing hooks, score capture, prompt-translation interface); the intelligence is thin until usage accumulates. That's fine — and is <em>why</em> it's defensible: a moat you can build on day one is one anyone can copy on day one. We design for it now (data capture from the first generation) and it sharpens over time.</blockquote>
+      <h3>⚠ The fatal contradiction in this moat</h3>
+      <div class="warn-box">
+        <p>The data flywheel <strong>conflicts directly with our own privacy/self-host pitch.</strong> Self-hosted users' data stays on <em>their</em> server — <strong>we never see it</strong> (the entire point of §4.4 &amp; §11). So the flywheel only spins on the <em>hosted</em> tier (post-v1, optional, competing with the free self-host version we tell everyone to use). <strong>We've designed a moat structurally incompatible with our distribution strategy.</strong> Unresolved options:</p>
+        <ol>
+          <li><strong>Opt-in anonymized telemetry</strong> — beg self-hosters to share data (most won't).</li>
+          <li><strong>Moat lives only on the hosted tier</strong> — self-host is a loss-leader funnel.</li>
+          <li><strong>Drop the data-flywheel claim</strong> — admit there's no compounding tech moat; compete on execution + ecosystem (§14.5).</li>
+        </ol>
+        <p>Until resolved, treat §4.6 as <strong>aspirational, not proven.</strong> See §14.5.</p>
+      </div>
+    </section>
+
+    <!-- 5 -->
+    <section id="s5">
+      <h2 class="sec"><span class="num">5</span> Functional requirements</h2>
+      <p>Priority: <span class="pill p0">P0</span> must-have · <span class="pill p1">P1</span> should-have · <span class="pill p2">P2</span> nice-to-have.</p>
+
+      <h3>5.1 Generation (core)</h3>
+      <div class="tbl-scroll"><table>
+        <thead><tr><th>ID</th><th>Requirement</th><th>Pri</th></tr></thead>
+        <tbody>
+          <tr><td>FR-1.1</td><td>Submit from prompt + options (aspectRatio, style, duration)</td><td><span class="pill p0">P0</span></td></tr>
+          <tr><td>FR-1.2</td><td>Select model/provider per generation, show cost/time estimate</td><td><span class="pill p0">P0</span></td></tr>
+          <tr><td>FR-1.3</td><td>Async lifecycle: queued → processing → succeeded/failed, progress 0–100</td><td><span class="pill p0">P0</span></td></tr>
+          <tr><td>FR-1.4</td><td>Live progress updates (poll or stream)</td><td><span class="pill p0">P0</span></td></tr>
+          <tr><td>FR-1.5</td><td>Cancel an in-flight job</td><td><span class="pill p0">P0</span></td></tr>
+          <tr><td>FR-1.6</td><td>Display result: inline player, poster, download</td><td><span class="pill p0">P0</span></td></tr>
+          <tr><td>FR-1.7</td><td>Prompt enhancement via LLM layer (toggleable)</td><td><span class="pill p1">P1</span></td></tr>
+          <tr><td>FR-1.8</td><td>Image-to-video: upload start/reference frame</td><td><span class="pill p1">P1</span></td></tr>
+          <tr><td>FR-1.9</td><td>Negative prompt + seed (reproducibility)</td><td><span class="pill p1">P1</span></td></tr>
+          <tr><td>FR-1.10</td><td>Storyboard mode: LLM splits script → batch render</td><td><span class="pill p2">P2</span></td></tr>
+          <tr><td>FR-1.11</td><td>Regenerate / variations from a prior job</td><td><span class="pill p2">P2</span></td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>5.2 Provider &amp; model management</h3>
+      <div class="tbl-scroll"><table>
+        <thead><tr><th>ID</th><th>Requirement</th><th>Pri</th></tr></thead>
+        <tbody>
+          <tr><td>FR-2.1</td><td>Configure + validate provider keys before first use</td><td><span class="pill p0">P0</span></td></tr>
+          <tr><td>FR-2.2</td><td>List models with capabilities (durations, ratios, max res, i2v, cost)</td><td><span class="pill p0">P0</span></td></tr>
+          <tr><td>FR-2.3</td><td>Reject requests exceeding a model's capabilities with clear error</td><td><span class="pill p0">P0</span></td></tr>
+          <tr><td>FR-2.4</td><td>Fallback chain on provider error/timeout</td><td><span class="pill p1">P1</span></td></tr>
+          <tr><td>FR-2.5</td><td>Open-weight support via Replicate/Fal + self-host GPU interface</td><td><span class="pill p1">P1</span></td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>5.3 History &amp; assets</h3>
+      <div class="tbl-scroll"><table>
+        <thead><tr><th>ID</th><th>Requirement</th><th>Pri</th></tr></thead>
+        <tbody>
+          <tr><td>FR-3.1</td><td>Per-user generation history (list, filter by status)</td><td><span class="pill p0">P0</span></td></tr>
+          <tr><td>FR-3.2</td><td>Persist job metadata + asset (object storage)</td><td><span class="pill p0">P0</span></td></tr>
+          <tr><td>FR-3.3</td><td>Asset lifecycle: TTL/delete, quota awareness</td><td><span class="pill p1">P1</span></td></tr>
+          <tr><td>FR-3.4</td><td>Re-open past job (prefilled prompt + settings)</td><td><span class="pill p1">P1</span></td></tr>
+          <tr><td>FR-3.5</td><td>Share link / public preview</td><td><span class="pill p2">P2</span></td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>5.4–5.8 Accounts · API/SDK · Safety · Metering · Admin</h3>
+      <ul>
+        <li><strong>Accounts:</strong> single-user default <span class="pill p1">P1</span>; multi-user OAuth + per-user keys <span class="pill p1">P1</span>; orgs/teams + roles <span class="pill p2">P2</span>; API tokens <span class="pill p2">P2</span>.</li>
+        <li><strong>API/SDK:</strong> REST mirroring UI contract <span class="pill p0">P0</span>; webhooks <span class="pill p1">P1</span>; OpenAPI + TS client <span class="pill p1">P1</span>; Python SDK <span class="pill p2">P2</span>.</li>
+        <li><strong>Safety:</strong> input moderation <span class="pill p0">P0</span>; output report path <span class="pill p1">P1</span>; rate limiting <span class="pill p1">P1</span>.</li>
+        <li><strong>Metering (managed):</strong> per-job cost attribution <span class="pill p1">P1</span>; usage dashboard <span class="pill p2">P2</span>; quotas/budget caps <span class="pill p2">P2</span>.</li>
+        <li><strong>Admin/obs:</strong> health + provider status <span class="pill p1">P1</span>; structured logs + audit <span class="pill p1">P1</span>; admin all-jobs view <span class="pill p2">P2</span>.</li>
+      </ul>
+    </section>
+
+    <!-- 6 -->
+    <section id="s6">
+      <h2 class="sec"><span class="num">6</span> Non-functional requirements</h2>
+      <div class="tbl-scroll"><table>
+        <thead><tr><th>ID</th><th>Category</th><th>Requirement</th></tr></thead>
+        <tbody>
+          <tr><td>NFR-1</td><td>Performance</td><td>UI &lt;100ms; submit→queued ack &lt;1s; progress ≤2s. Render is provider-bound — surface ETA, don't block.</td></tr>
+          <tr><td>NFR-2</td><td>Scalability</td><td>Horizontally scalable; workers independent of web tier; queue-backed. Target 100 concurrent jobs on a modest deploy.</td></tr>
+          <tr><td>NFR-3</td><td>Reliability</td><td>Jobs survive worker restart (durable queue + persisted state). At-least-once + idempotent submit. Graceful failover.</td></tr>
+          <tr><td>NFR-4</td><td>Security</td><td>Keys encrypted at rest, never logged/returned/in-browser. Secrets via env/secret store. TLS. Input validation. Dep scanning in CI.</td></tr>
+          <tr><td>NFR-5</td><td>Privacy</td><td>Self-host = data never leaves user infra (except chosen providers). No telemetry without opt-in. Clear data-flow docs.</td></tr>
+          <tr><td>NFR-6</td><td>Portability</td><td><code>docker compose up</code> locally; any container host; no single-cloud lock-in. Postgres + S3-compatible (MinIO local).</td></tr>
+          <tr><td>NFR-7</td><td>Maintainability</td><td>Typed end-to-end. Adapters isolated &amp; independently testable. &gt;70% coverage on core orchestration.</td></tr>
+          <tr><td>NFR-8</td><td>Accessibility</td><td>WCAG 2.1 AA: keyboard nav, focus, reduced-motion, contrast verified on pastel palette.</td></tr>
+          <tr><td>NFR-9</td><td>Observability</td><td>Structured logging, tracing, per-job metrics, provider latency/error dashboards.</td></tr>
+          <tr><td>NFR-10</td><td>Cost transparency</td><td>Show estimates pre-render, actuals post-render. Never hide spend.</td></tr>
+          <tr><td>NFR-11</td><td>i18n-ready</td><td>Strings externalized; English v1, structure ready to localize.</td></tr>
+          <tr><td>NFR-12</td><td>Licensing</td><td>OSS-compatible deps, royalty-free assets, SBOM generated.</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <!-- 7 -->
+    <section id="s7">
+      <h2 class="sec"><span class="num">7</span> System architecture</h2>
+      <h3>High-level</h3>
+      <pre><code>Browser (Next.js 16 / React 19)
+  Marketing site · Studio UI · history · player
+        │  HTTPS (REST/JSON, optional SSE)
+        ▼
+Next.js BFF (route handlers)
+  Auth/session · validation · proxy to Python (keeps keys server-side)
+        │  internal HTTP/RPC
+        ▼
+Python API (FastAPI)
+  Intake · provider registry/router · capability validation
+  moderation · cost attribution · webhooks
+   │ enqueue                       │ read/write
+   ▼                               ▼
+Queue/Broker (Redis/RQ|Celery)   Postgres (jobs, users, keys[enc], usage)
+   │ dequeue
+   ▼
+Worker(s)
+  LLMProvider (LiteLLM) → enhance/script/moderate
+  VideoProvider adapters → submit/poll/cancel
+  [Runway · Luma · Pika · Veo · Kling · Replicate · Fal · self-host GPU]
+        │ store asset
+        ▼
+Object storage (S3 / R2 / MinIO) — videos + posters</code></pre>
+      <h3>Why Next.js + Python</h3>
+      <ul>
+        <li><strong>Next.js 16 / React 19</strong> (already in repo): studio UX, marketing, thin BFF keeping keys server-side.</li>
+        <li><strong>Python (FastAPI):</strong> the AI/ML ecosystem — provider SDKs, LiteLLM, moderation, future self-hosted inference. Workers + adapters live here.</li>
+        <li><strong>Boundary:</strong> Next.js owns presentation + session + edge key custody; Python owns orchestration, providers, long-running jobs.</li>
+      </ul>
+    </section>
+
+    <!-- 8 -->
+    <section id="s8">
+      <h2 class="sec"><span class="num">8</span> Data model</h2>
+      <pre><code>User        (id, email, created_at, role)            # multi-user only
+ProviderKey (id, user_id?, org_id?, provider, ciphertext, created_at)
+Model       (id, provider, name, capabilities_json, cost_hint, enabled)
+Job         (id, user_id?, prompt, enhanced_prompt?, model_id, aspect_ratio,
+             style, duration, status, progress, video_url?, poster_url?,
+             seed?, negative_prompt?, error?, provider_job_id?,
+             cost_actual?, created_at, updated_at)
+Asset       (id, job_id, kind[video|poster], storage_key, bytes, ttl?)
+UsageEvent  (id, user_id?, job_id, provider, units, unit_type, cost, created_at)
+Webhook     (id, user_id?, url, secret, events[])</code></pre>
+      <p><code>Job</code> is a superset of the existing <code>VideoJob</code> TS interface — the API contract stays compatible with <code>src/lib/types.ts</code>.</p>
+    </section>
+
+    <!-- 9 -->
+    <section id="s9">
+      <h2 class="sec"><span class="num">9</span> API contracts (v1)</h2>
+      <pre><code>POST   /api/v1/generate        # GenerateRequest + {model?, options?} → 202 VideoJob
+GET    /api/v1/jobs/:id         # → VideoJob (poll)
+GET    /api/v1/jobs/:id/stream  # → SSE progress events (P1)
+POST   /api/v1/jobs/:id/cancel  # → VideoJob
+GET    /api/v1/jobs             # → VideoJob[] (history, paginated)
+GET    /api/v1/models           # → Model[] with capabilities
+POST   /api/v1/keys             # multi-user: add/validate a provider key
+POST   /api/v1/prompt/enhance   # → {enhancedPrompt}
+GET    /healthz                 # health + provider status</code></pre>
+      <p>Writes validate against capabilities (FR-2.3) and moderation (FR-6.1). Errors use a consistent <code>{error, code}</code> envelope (the frontend's existing expectation).</p>
+    </section>
+
+    <!-- 10 -->
+    <section id="s10">
+      <h2 class="sec"><span class="num">10</span> Competitive benchmarking</h2>
+      <h3>Proprietary SaaS we route <em>to</em> (not head-on)</h3>
+      <div class="tbl-scroll"><table>
+        <thead><tr><th>Product</th><th>Strength</th><th>Open?</th><th>BYO-key?</th><th>Self-host?</th></tr></thead>
+        <tbody>
+          <tr><td>Runway (Gen-3/4)</td><td>Top-tier quality</td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td></tr>
+          <tr><td>Pika</td><td>Fast, stylized</td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td></tr>
+          <tr><td>Luma (Dream Machine)</td><td>Strong realism</td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td></tr>
+          <tr><td>OpenAI Sora</td><td>High fidelity</td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td></tr>
+          <tr><td>Google Veo</td><td>High fidelity</td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td></tr>
+          <tr><td>Kling</td><td>Long clips</td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td></tr>
+        </tbody>
+      </table></div>
+      <p>We don't beat these on raw model quality — we <strong>aggregate</strong> them under one open, self-hostable control plane with no markup.</p>
+      <h3>The real competitive set (OSS / aggregators)</h3>
+      <div class="tbl-scroll"><table>
+        <thead><tr><th>Project</th><th>What it is</th><th>Gap VolfPack fills</th></tr></thead>
+        <tbody>
+          <tr><td>ComfyUI</td><td>Node-based local gen for power users</td><td>Product UX + multi-provider API, far lower barrier</td></tr>
+          <tr><td>Replicate / Fal</td><td>Hosted model marketplaces</td><td>A backend we use; we add UI, history, key custody, self-host</td></tr>
+          <tr><td>LiteLLM</td><td>LLM provider unification (text)</td><td>We use it; extend the idea to video + a studio</td></tr>
+          <tr><td>Invoke / Fooocus / SD WebUIs</td><td>OSS image-gen UIs</td><td>Video-first, multi-provider incl. closed APIs</td></tr>
+          <tr><td>LibreChat / Open WebUI</td><td>OSS BYO-key chat UIs</td><td>The "Open WebUI for text-to-video" — our north star</td></tr>
+        </tbody>
+      </table></div>
+      <blockquote><strong>Positioning:</strong> VolfPack is the <strong>"Open WebUI for text-to-video"</strong> — a clean, self-hostable, BYO-key studio putting every video model (closed APIs <em>and</em> open weights) behind one contract, with your data and spend under your control.</blockquote>
+      <h3>Differentiators</h3>
+      <ol>
+        <li><strong>Video-first multi-provider</strong> — most OSS BYO-key tools are chat/image only.</li>
+        <li><strong>Closed + open under one roof</strong> — route to Runway <em>and</em> run LTX-Video locally.</li>
+        <li><strong>Self-host + privacy + no markup.</strong></li>
+        <li><strong>Open-core, hackable, typed</strong> — built to be forked and extended.</li>
+      </ol>
+    </section>
+
+    <!-- 11 -->
+    <section id="s11">
+      <h2 class="sec"><span class="num">11</span> Open-source &amp; distribution</h2>
+      <h3>Licensing</h3>
+      <ul>
+        <li><strong>Core: MIT</strong> — maximizes adoption + contribution, fits self-host devs.</li>
+        <li>Keep managed-only features (billing, SSO, advanced quotas) cleanly separated for a future open-core split.</li>
+        <li><strong>DCO</strong> for contributions (lighter than a CLA).</li>
+      </ul>
+      <h3>Distribution channels</h3>
+      <div class="tbl-scroll"><table>
+        <thead><tr><th>Channel</th><th>Artifact</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td>GitHub</td><td>Source, releases, issues, discussions</td><td>Home base, contribution funnel</td></tr>
+          <tr><td>Docker Hub / GHCR</td><td>Image + <code>docker-compose.yml</code></td><td>One-command self-host</td></tr>
+          <tr><td>Deploy buttons</td><td>Railway/Render/Fly templates</td><td>Friction-free trial deploy</td></tr>
+          <tr><td>npm</td><td><code>@volfpack/client</code> (TS SDK)</td><td>Integrators</td></tr>
+          <tr><td>PyPI</td><td><code>volfpack</code> (Python SDK)</td><td>Integrators</td></tr>
+          <tr><td>Docs site</td><td>Guides, API ref, adapter cookbook</td><td>Onboarding + SEO</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Community &amp; OSS niche</h3>
+      <ul>
+        <li><strong>Launch surfaces:</strong> Product Hunt, "Show HN", r/selfhosted, r/StableDiffusion, r/LocalLLaMA, Lobsters.</li>
+        <li><strong>Narrative:</strong> lean hard on "the Open WebUI for video" — instantly legible to self-hosters.</li>
+        <li><strong>Contribution magnet:</strong> make writing a new provider adapter a ~100-line, well-documented, well-tested pattern — adapters are the community contribution <em>and</em> the moat.</li>
+        <li><strong>Niche flag:</strong> self-hosters &amp; privacy devs (LocalLLaMA / selfhosted overlap) who already BYO-key for LLMs.</li>
+      </ul>
+    </section>
+
+    <!-- 12 -->
+    <section id="s12">
+      <h2 class="sec"><span class="num">12</span> Monetization <span class="chip lav" style="font-size:.7rem;vertical-align:middle;">designed-in, not v1</span></h2>
+      <ol>
+        <li><strong>Self-host (free, MIT):</strong> whole product, BYO-key. Drives adoption.</li>
+        <li><strong>Managed cloud (paid, future):</strong> we run it — managed keys with metering, or BYO-key + hosting fee; teams, SSO, quotas, SLA.</li>
+        <li><strong>Pro/enterprise modules (future):</strong> advanced observability, audit, RBAC, priority support.</li>
+      </ol>
+      <blockquote>Revenue follows adoption — v1's job is to be the best free self-host option.</blockquote>
+    </section>
+
+    <!-- 13 -->
+    <section id="s13">
+      <h2 class="sec"><span class="num">13</span> Metrics &amp; KPIs</h2>
+      <h3>North-star</h3>
+      <p><strong>Weekly successful generations across self-hosted instances</strong> (opt-in telemetry) — proves the product does its core job in the wild.</p>
+      <h3>Adoption (OSS health)</h3>
+      <p>Stars, forks, unique cloners; Docker pulls; deploy-button installs; <strong>community-contributed adapters</strong> (moat signal); contributors, PR merge rate, issue close time.</p>
+      <h3>Activation / product</h3>
+      <p>Time-to-first-successful-generation after install (target &lt;10 min); generation success rate (&gt;90% excl. provider outages); submit→queued ack latency; p50/p95 render time per provider.</p>
+      <h3>Reliability</h3>
+      <p>Failure rate by provider; fallback trigger rate; crash-free worker rate; jobs-lost rate (~0 via durable queue).</p>
+      <h3>Future (managed)</h3>
+      <p>Self-host→hosted conversion, MRR, gross margin after provider cost.</p>
+    </section>
+
+    <!-- 14 -->
+    <section id="s14">
+      <h2 class="sec"><span class="num">14</span> Risks &amp; mitigations</h2>
+      <div class="tbl-scroll"><table>
+        <thead><tr><th>#</th><th>Risk</th><th>L</th><th>I</th><th>Mitigation</th></tr></thead>
+        <tbody>
+          <tr><td>R1</td><td>"Any LLM key" ≠ video confusion</td><td>High</td><td>High</td><td>§4 two-class messaging in UI/docs</td></tr>
+          <tr><td>R2</td><td>Video-gen is expensive; surprise bills</td><td>High</td><td>High</td><td>Pre-render estimates, budget caps, cheap defaults</td></tr>
+          <tr><td>R3</td><td>Provider API churn</td><td>High</td><td>Med</td><td>Thin isolated adapters, contract tests, fallbacks</td></tr>
+          <tr><td>R4</td><td>Key security breach (multi-user)</td><td>Med</td><td>Crit</td><td>Envelope encryption, never log/return, security CI</td></tr>
+          <tr><td>R5</td><td>Provider ToS forbids aggregation</td><td>Med</td><td>High</td><td>Verify each ToS; BYO-key (user's own account) is safe path</td></tr>
+          <tr><td>R6</td><td>Self-hosting GPU models is heavy</td><td>Med</td><td>Med</td><td>Lead with hosted APIs + Replicate/Fal; GPU optional</td></tr>
+          <tr><td>R7</td><td>Content safety / misuse</td><td>Med</td><td>High</td><td>Moderation, report path, provider safety, AUP</td></tr>
+          <tr><td>R8</td><td>Scope creep (editor/audio/mobile)</td><td>High</td><td>Med</td><td>Enforce §3 non-goals; ruthless v1 cut</td></tr>
+          <tr><td>R9</td><td>Early maintainer bandwidth</td><td>High</td><td>Med</td><td>Adapter contribution pattern, docs, DCO, CI/release automation</td></tr>
+          <tr><td>R10</td><td>Crowded space; hard to notice</td><td>Med</td><td>Med</td><td>Sharp positioning, demo GIF, HN/PH launch</td></tr>
+          <tr><td>R11</td><td>License/asset compliance</td><td>Low</td><td>Med</td><td>Royalty-free samples, SBOM, license scan</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <!-- 14.5 -->
+    <section id="s145" class="danger">
+      <h2 class="sec"><span class="num">14.5</span> Why this project might fail (devil's advocate)</h2>
+      <blockquote>A PRD that can't argue against itself isn't trustworthy. This is the adversarial read — the case a skeptical investor or hostile HN thread makes. Each point is real; some may be fatal. Read this <em>before</em> believing §4.6.</blockquote>
+
+      <h3>W1 — The moat contradicts the strategy <span class="pill p0">most serious</span></h3>
+      <p>The data-flywheel moat (§4.6) needs usage data; the privacy/self-host pitch (§4.4, §11) guarantees we <strong>never see self-hosted usage data.</strong> Moat and distribution are mutually exclusive. As designed, <strong>there is likely no compounding tech moat for the product people actually adopt (self-host).</strong></p>
+
+      <h3>W2 — "Orchestration intelligence" may solve a non-problem</h3>
+      <ul>
+        <li><strong>Prompt translation</strong> bets on models <em>staying</em> diverse — but they're converging on good NL understanding. The skill may obsolete itself.</li>
+        <li><strong>Multi-provider routing</strong> assumes users want to optimize across many models. Most pick one they trust. Auto-routing may be a solution without a problem.</li>
+        <li><strong>Cross-shot consistency</strong> is being solved <em>inside the models</em> by labs with billions. Out-innovating Runway/Google solo isn't credible.</li>
+      </ul>
+
+      <h3>W3 — The economics punish the exact target user</h3>
+      <p>Video gen is expensive and slow. The price-sensitive dev who wants BYO-key is the <em>least</em> likely to keep paying for generations. Most drawn to self-host = least likely to generate at volume.</p>
+
+      <h3>W4 — Local gen (our best anti-wrapper point) needs a $1,500+ GPU</h3>
+      <p>The strongest "not a wrapper" claim is usable only on high-VRAM hardware a tiny minority owns. The dev machine here (8 GB M1) literally can't run the good models. The differentiator reaches a sliver of the market.</p>
+
+      <h3>W5 — The incumbents are also the studios</h3>
+      <p>Runway, Pika, Luma all ship polished web apps. Our aggregation value evaporates the moment a user decides one model is "good enough" — the common case. We're a thin layer between users and labs building the same UX themselves.</p>
+
+      <h3>W6 — Provider dependency &amp; ToS risk (underweighted in R5)</h3>
+      <p>Closed providers can forbid third-party UIs or kill BYO-key access overnight. The "aggregate the closed APIs" pitch sits entirely at their mercy.</p>
+
+      <h3>W7 — The community moat assumes a community</h3>
+      <p>The adapter-ecosystem story needs contributors. Most OSS projects never get a second one. Meanwhile a solo maintainer chases ~8 churning video APIs — a treadmill.</p>
+
+      <h3>W8 — Honest verdict</h3>
+      <div class="warn-box">
+        <p>This is a <strong>strong learning/portfolio project</strong> and a <strong>plausible small, beloved OSS tool</strong> ("the Open WebUI for video"). It is a <strong>weak startup</strong> and a <strong>very weak defensible business.</strong> Best realistic outcome: a respected MIT community tool that's hard to monetize — not a venture-scale company with a tech moat.</p>
+      </div>
+
+      <h3>What would make it <em>not</em> bad (pivots worth considering)</h3>
+      <ul>
+        <li><strong>Niche down hard:</strong> own one wedge competitors ignore — <em>local/offline video gen for privacy-bound users</em> ("Ollama for video") — and be the best at only that. A small defensible niche beats a broad indefensible platform.</li>
+        <li><strong>Pick a vertical:</strong> stop being horizontal infra; become "text-to-video for [e-commerce product videos / D&amp;D scenes / educational explainers]" where workflow + templates + domain data are the moat.</li>
+        <li><strong>Be a library, not a platform:</strong> if the honest moat is "good abstraction code," ship the <em>de-facto open SDK</em> (LiteLLM-for-video) and let the ecosystem standardize on you — distribution as moat.</li>
+        <li><strong>Accept no-moat, optimize for speed/reputation:</strong> treat it as a portfolio flagship and developer-reputation play, not a business. Legitimate and honest.</li>
+      </ul>
+    </section>
+
+    <!-- 15 -->
+    <section id="s15">
+      <h2 class="sec"><span class="num">15</span> Roadmap &amp; milestones</h2>
+      <div class="tbl-scroll"><table>
+        <thead><tr><th>Milestone</th><th>Scope</th><th>Exit criteria</th></tr></thead>
+        <tbody>
+          <tr><td><strong>M0 — Foundation</strong></td><td>Frontend, mocked route, design system</td><td>✅ Done (current repo)</td></tr>
+          <tr><td><strong>M1 — Real backend, 1 provider</strong></td><td>FastAPI + queue + worker; 1 video provider; persisted lifecycle; storage</td><td>Real prompt → real video in UI</td></tr>
+          <tr><td><strong>M2 — Multi-provider + LLM</strong></td><td>≥3 video providers; LiteLLM enhance; model select + capability validation; history</td><td>Pick model; enhance works; history persists</td></tr>
+          <tr><td><strong>M3 — Self-host polish</strong></td><td><code>docker compose up</code>; docs; key validation; moderation; health</td><td>Stranger self-hosts in &lt;10 min from README</td></tr>
+          <tr><td><strong>M4 — API/SDK + webhooks</strong></td><td>OpenAPI, TS/Python SDK, webhooks, fallbacks</td><td>Integrator drives a generation headless</td></tr>
+          <tr><td><strong>M5 — Multi-user (flag)</strong></td><td>Auth, encrypted per-user keys, rate limits</td><td>Team self-host with isolated histories/keys</td></tr>
+          <tr><td><strong>M6 — Managed beta (optional)</strong></td><td>Metering, budgets, hosted deploy</td><td>First hosted user generates with metered billing</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <!-- 16 -->
+    <section id="s16">
+      <h2 class="sec"><span class="num">16</span> Open questions</h2>
+      <ol>
+        <li><strong>Open-core boundary:</strong> stay pure MIT, or carve managed-only features later? (Affects module structure now.)</li>
+        <li><strong>Default cheapest video provider</strong> for "it just works on install" — Replicate-hosted open model vs. a free-tier API?</li>
+        <li><strong>Progress UX:</strong> polling (simpler) vs SSE for v1?</li>
+        <li><strong>Queue:</strong> Redis+RQ (simpler) vs Celery (more features)?</li>
+        <li><strong>Telemetry:</strong> opt-in anonymous stats for the north-star metric — privacy-respecting, trust-earning?</li>
+        <li><strong>Branding:</strong> <code>site.ts</code> points at <code>volfpack.ai</code> but repo lives under <code>volfpackonline</code> — reconcile domains/handles.</li>
+        <li><strong>Self-hosted GPU adapter:</strong> ship in v1 or defer to community?</li>
+      </ol>
+    </section>
+
+  </div>
+
+  <footer>
+    VolfPack PRD · Draft v1 · 2026-06-18 · MIT ·
+    <a href="https://github.com/volfpackonline/volfpackfrontend">github.com/volfpackonline/volfpackfrontend</a><br />
+    Generated companion to <code>PRD.md</code> · soft-pastel theme per <code>design.md</code>
+  </footer>
+</body>
+</html>
