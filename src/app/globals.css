@@ -1,26 +1,186 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-quicksand);
   --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-baloo);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  /* Soft pastel — light is the default brand theme. */
+  --background: oklch(0.99 0.008 85); /* warm cream */
+  --foreground: oklch(0.4 0.03 300); /* warm ink, never pure black */
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.4 0.03 300);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.4 0.03 300);
+  --primary: oklch(0.72 0.13 295); /* lavender */
+  --primary-foreground: oklch(0.99 0.005 300);
+  --secondary: oklch(0.97 0.015 320); /* faint pink-white */
+  --secondary-foreground: oklch(0.45 0.05 300);
+  --muted: oklch(0.97 0.012 310);
+  --muted-foreground: oklch(0.6 0.03 300);
+  --accent: oklch(0.93 0.045 350); /* soft pink */
+  --accent-foreground: oklch(0.5 0.1 350);
+  --destructive: oklch(0.68 0.16 18); /* soft coral */
+  --border: oklch(0.93 0.015 320);
+  --input: oklch(0.93 0.015 320);
+  --ring: oklch(0.72 0.13 295);
+  --chart-1: oklch(0.78 0.12 295); /* lavender */
+  --chart-2: oklch(0.82 0.1 350); /* pink */
+  --chart-3: oklch(0.85 0.1 160); /* mint */
+  --chart-4: oklch(0.86 0.09 70); /* peach */
+  --chart-5: oklch(0.84 0.08 230); /* sky */
+  --radius: 1.25rem;
+  --sidebar: oklch(0.99 0.008 85);
+  --sidebar-foreground: oklch(0.4 0.03 300);
+  --sidebar-primary: oklch(0.72 0.13 295);
+  --sidebar-primary-foreground: oklch(0.99 0.005 300);
+  --sidebar-accent: oklch(0.93 0.045 350);
+  --sidebar-accent-foreground: oklch(0.5 0.1 350);
+  --sidebar-border: oklch(0.93 0.015 320);
+  --sidebar-ring: oklch(0.72 0.13 295);
+}
+
+.dark {
+  /* Gentle dark — deep plum, not gray. The brand still feels soft. */
+  --background: oklch(0.22 0.025 300);
+  --foreground: oklch(0.95 0.012 320);
+  --card: oklch(0.26 0.03 300);
+  --card-foreground: oklch(0.95 0.012 320);
+  --popover: oklch(0.26 0.03 300);
+  --popover-foreground: oklch(0.95 0.012 320);
+  --primary: oklch(0.78 0.12 295); /* lavender, lifted */
+  --primary-foreground: oklch(0.22 0.03 300);
+  --secondary: oklch(0.31 0.03 300);
+  --secondary-foreground: oklch(0.95 0.012 320);
+  --muted: oklch(0.31 0.03 300);
+  --muted-foreground: oklch(0.74 0.02 310);
+  --accent: oklch(0.36 0.06 350);
+  --accent-foreground: oklch(0.92 0.04 350);
+  --destructive: oklch(0.7 0.15 18);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.78 0.12 295);
+  --chart-1: oklch(0.78 0.12 295);
+  --chart-2: oklch(0.82 0.1 350);
+  --chart-3: oklch(0.85 0.1 160);
+  --chart-4: oklch(0.86 0.09 70);
+  --chart-5: oklch(0.84 0.08 230);
+  --sidebar: oklch(0.26 0.03 300);
+  --sidebar-foreground: oklch(0.95 0.012 320);
+  --sidebar-primary: oklch(0.78 0.12 295);
+  --sidebar-primary-foreground: oklch(0.22 0.03 300);
+  --sidebar-accent: oklch(0.36 0.06 350);
+  --sidebar-accent-foreground: oklch(0.92 0.04 350);
+  --sidebar-border: oklch(1 0 0 / 12%);
+  --sidebar-ring: oklch(0.78 0.12 295);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-medium;
+  }
+  html {
+    @apply font-sans;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-heading;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Soft pastel headline gradient. */
+@utility text-gradient-brand {
+  @apply bg-gradient-to-r from-violet-400 via-pink-400 to-sky-400 bg-clip-text text-transparent;
+}
+
+/* Gentle dotted background, fades out at the edges via a mask in markup. */
+@utility bg-dots {
+  background-image: radial-gradient(
+    color-mix(in oklch, var(--primary) 22%, transparent) 1.4px,
+    transparent 1.4px
+  );
+  background-size: 22px 22px;
+}
+
+/* Signature soft, faintly-lavender lifted shadow. */
+@utility shadow-cute {
+  box-shadow:
+    0 1px 2px oklch(0.72 0.13 295 / 0.06),
+    0 8px 24px oklch(0.72 0.13 295 / 0.1);
+}
+
+@utility shadow-cute-lg {
+  box-shadow:
+    0 2px 4px oklch(0.72 0.13 295 / 0.08),
+    0 16px 40px oklch(0.72 0.13 295 / 0.14);
+}
+
+/* Slow floating motion for decorative pastel blobs. */
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-14px) translateX(8px);
+  }
+}
+
+@utility animate-float-soft {
+  animation: float-soft 9s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float-soft {
+    animation: none;
+  }
 }

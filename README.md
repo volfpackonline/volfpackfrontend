@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# VolfPack — Frontend
 
-## Getting Started
+> Turn words into video. The open-source text-to-video AI.
 
-First, run the development server:
+This repo contains the **Next.js frontend** for VolfPack. It ships a marketing
+landing page and a working **Studio** where you describe a scene and generate a
+video. The generation backend is currently **mocked** so the full UX works
+end-to-end on Day 0 — wiring up real inference is the next step.
+
+## Tech stack
+
+- [Next.js 16](https://nextjs.org) (App Router) + React 19
+- TypeScript
+- [Tailwind CSS v4](https://tailwindcss.com)
+- [shadcn/ui](https://ui.shadcn.com) components (Radix primitives)
+- [next-themes](https://github.com/pacocoursey/next-themes) for dark/light mode
+- [sonner](https://sonner.emilkowal.ski) for toasts
+- [lucide-react](https://lucide.dev) icons
+
+## Getting started
 
 ```bash
+# 1. Install dependencies
+npm install
+
+# 2. Set up environment variables
+cp .env.example .env.local
+
+# 3. Run the dev server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Script              | Description                    |
+| ------------------- | ----------------------------- |
+| `npm run dev`       | Start the dev server          |
+| `npm run build`     | Production build              |
+| `npm run start`     | Run the production build      |
+| `npm run lint`      | Lint with ESLint              |
+| `npm run typecheck` | Type-check with `tsc --noEmit` |
 
-## Learn More
+## Project structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+├── app/
+│   ├── api/generate/route.ts   # Mocked text-to-video endpoint
+│   ├── generate/page.tsx       # The Studio page
+│   ├── layout.tsx              # Root layout (theme, header, footer, toaster)
+│   └── page.tsx                # Marketing landing page
+├── components/
+│   ├── marketing/              # Hero, features, how-it-works, CTA
+│   ├── studio/                 # Prompt form, result card, studio shell
+│   ├── ui/                     # shadcn/ui primitives
+│   ├── site-header.tsx
+│   ├── site-footer.tsx
+│   └── theme-*.tsx
+└── lib/
+    ├── api.ts                  # Client for the generation endpoint
+    ├── site.ts                 # Central site/brand config
+    ├── types.ts                # Shared types (jobs, request, options)
+    └── utils.ts                # cn() helper
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Connecting a real backend
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The Studio calls `POST /api/generate`, which today returns a sample clip after a
+short delay (see [`src/app/api/generate/route.ts`](src/app/api/generate/route.ts)).
 
-## Deploy on Vercel
+To swap in real inference, either:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Replace the body of that route with a call to your model service, using the
+   `NEXT_PUBLIC_API_URL` and `VOLFPACK_API_KEY` env vars, **or**
+2. Point `NEXT_PUBLIC_API_URL` at an external API that implements the same
+   `GenerateRequest` → `VideoJob` contract (see
+   [`src/lib/types.ts`](src/lib/types.ts)).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Environment variables
+
+See [`.env.example`](.env.example). Anything prefixed `NEXT_PUBLIC_` is exposed
+to the browser — keep secrets (like `VOLFPACK_API_KEY`) unprefixed.
+
+## License
+
+MIT
