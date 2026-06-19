@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { siteConfig } from "@/lib/site";
 
 export function CTA() {
   return (
@@ -32,7 +33,7 @@ export function CTA() {
               className="h-12 border-violet-400/60 px-8 text-base text-violet-950 hover:bg-white/40"
             >
               <a
-                href="https://github.com/videoenigma/videoenigma"
+                href={siteConfig.github}
                 target="_blank"
                 rel="noreferrer"
               >
