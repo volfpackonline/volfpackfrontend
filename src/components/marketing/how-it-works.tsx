@@ -1,27 +1,27 @@
 const steps = [
   {
     step: "1",
-    emoji: "✍️",
+    emoji: "🔗",
     color: "bg-violet-100 text-violet-500",
-    title: "Write a prompt",
+    title: "Paste a video URL",
     description:
-      "Describe your scene — the subject, the mood, the camera move. The more vivid, the better.",
+      "Drop in a YouTube link (or upload a file). Video Enigma downloads the source, extracts audio, and scores it for repurposability.",
   },
   {
     step: "2",
-    emoji: "🎨",
+    emoji: "✂️",
     color: "bg-pink-100 text-pink-500",
-    title: "Choose your look",
+    title: "Pipeline does the work",
     description:
-      "Pick an aspect ratio, a visual style, and a duration that fit where the video is going.",
+      "AI crops landscape to vertical, finds the best moments, rewrites scripts for shorts pacing, generates TTS audio, and burns captions.",
   },
   {
     step: "3",
-    emoji: "🎬",
+    emoji: "✅",
     color: "bg-sky-100 text-sky-500",
-    title: "Generate & download",
+    title: "Review, approve & export",
     description:
-      "Watch it render in real time, preview the result, and export your clip in one click.",
+      "Correct anything in the crop, split, script, or caption editors. Approve the final short and export a publish-ready file.",
   },
 ];
 
@@ -34,11 +34,11 @@ export function HowItWorks() {
       <div className="mx-auto max-w-6xl px-4 py-24 sm:px-6">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-            From idea to video in three steps
+            From long-form to publishable short in three steps
           </h2>
           <p className="mt-4 text-muted-foreground">
-            No editing experience required. If you can describe it, you can
-            create it.
+            One URL. A full editing pipeline. A reviewable short — without
+            touching a timeline by hand.
           </p>
         </div>
 

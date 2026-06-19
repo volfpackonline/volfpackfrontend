@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
@@ -10,24 +10,36 @@ export function CTA() {
         <div className="pointer-events-none absolute inset-0 bg-dots opacity-50" />
         <div className="animate-float-soft pointer-events-none absolute -right-8 -top-8 size-40 rounded-full bg-white/40 blur-2xl" />
         <div className="relative">
-          <span className="text-4xl">🎬✨</span>
+          <span className="text-4xl">📹✂️</span>
           <h2 className="mt-3 text-balance text-3xl font-bold tracking-tight sm:text-4xl">
-            Your next video is one sentence away
+            Your long-form library is already full of shorts
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-balance text-violet-900/80">
-            Start creating for free. Open the studio, write a prompt, and
-            generate something worth sharing.
+            Self-host for free, bring your own API keys, and start shipping
+            publishable clips today. No editing suite required.
           </p>
-          <Button
-            asChild
-            size="lg"
-            className="mt-8 h-12 px-8 text-base"
-          >
-            <Link href="/generate">
-              <Sparkles className="size-4" />
-              Open the studio
-            </Link>
-          </Button>
+          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Button asChild size="lg" className="h-12 px-8 text-base">
+              <Link href="/generate">
+                Start processing videos
+                <ArrowRight className="size-4" />
+              </Link>
+            </Button>
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="h-12 border-violet-400/60 px-8 text-base text-violet-950 hover:bg-white/40"
+            >
+              <a
+                href="https://github.com/videoenigma/videoenigma"
+                target="_blank"
+                rel="noreferrer"
+              >
+                View on GitHub
+              </a>
+            </Button>
+          </div>
         </div>
       </div>
     </section>

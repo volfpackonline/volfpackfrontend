@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Sparkles, Star } from "lucide-react";
+import { ArrowRight, Play, Star } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/lib/site";
@@ -24,21 +24,22 @@ export function Hero() {
         </Link>
 
         <h1 className="text-balance text-4xl font-bold tracking-tight sm:text-6xl">
-          Turn a sentence into a{" "}
-          <span className="text-gradient-brand">cinematic video</span>
+          Turn your long-form library into a{" "}
+          <span className="text-gradient-brand">shorts revenue machine</span>
         </h1>
 
         <p className="mt-6 max-w-2xl text-balance text-lg text-muted-foreground">
-          {siteConfig.name} is the open-source text-to-video AI. Describe any
-          scene in plain language and watch it come to life in seconds — no
-          camera, no crew, no editing suite.
+          {siteConfig.name} is the open-source AI shorts operating system.
+          Paste a YouTube URL, let the pipeline do the heavy lifting — crop,
+          transcript, rewrite, TTS, captions, assemble — and ship publishable
+          shorts in minutes, not hours.
         </p>
 
         <div className="mt-10 flex flex-col gap-3 sm:flex-row">
           <Button asChild size="lg" className="h-12 px-7 text-base">
             <Link href="/generate">
-              <Sparkles className="size-4" />
-              Generate your first video
+              <Play className="size-4" />
+              Process your first video
             </Link>
           </Button>
           <Button
@@ -55,7 +56,7 @@ export function Hero() {
         </div>
 
         <p className="mt-5 text-sm text-muted-foreground">
-          Free to try · No credit card required
+          Free to self-host · BYO API keys · No vendor lock-in
         </p>
       </div>
     </section>

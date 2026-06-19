@@ -1,50 +1,56 @@
-import { Clapperboard, Gauge, Layers, Sliders, Wand2 } from "lucide-react";
+import {
+  Captions,
+  GitBranch,
+  Layers,
+  Mic2,
+  Scissors,
+  TrendingUp,
+} from "lucide-react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { GitHubIcon } from "@/components/icons";
 
 const features = [
   {
-    icon: Wand2,
-    title: "Prompt to video",
+    icon: Scissors,
+    title: "Source-to-short pipeline",
     color: "bg-violet-100 text-violet-500",
     description:
-      "Describe a scene in natural language and get a polished clip back. No timelines, no keyframes.",
+      "Download, crop to vertical, split into segments, clean frames, transcribe, rewrite, and assemble — all from a single URL.",
   },
   {
-    icon: Sliders,
-    title: "Total creative control",
+    icon: Mic2,
+    title: "AI voice & captions",
     color: "bg-pink-100 text-pink-500",
     description:
-      "Dial in aspect ratio, style, and duration. Re-roll until it matches what's in your head.",
-  },
-  {
-    icon: Clapperboard,
-    title: "Cinematic styles",
-    color: "bg-sky-100 text-sky-500",
-    description:
-      "From photorealistic to anime to claymation — pick a look and stay on-brand across clips.",
-  },
-  {
-    icon: Gauge,
-    title: "Fast generations",
-    color: "bg-emerald-100 text-emerald-500",
-    description:
-      "Stream progress in real time and preview results the moment a render finishes.",
+      "Generate TTS audio with ElevenLabs or local Bark, then burn word-level animated captions directly into the final export.",
   },
   {
     icon: Layers,
-    title: "Built to scale",
-    color: "bg-amber-100 text-amber-500",
+    title: "Channel-level defaults",
+    color: "bg-sky-100 text-sky-500",
     description:
-      "A clean Next.js frontend ready to plug into any inference backend or model provider.",
+      "Configure crop strategy, voice, language, and caption style per channel. Every new project inherits them instantly.",
   },
   {
-    icon: GitHubIcon,
-    title: "Open source",
+    icon: GitBranch,
+    title: "Provider-agnostic AI",
+    color: "bg-emerald-100 text-emerald-500",
+    description:
+      "Swap STT, LLM, TTS, and OCR providers without rewriting the pipeline. BYO keys or use managed credits — your choice.",
+  },
+  {
+    icon: Captions,
+    title: "Human review editors",
+    color: "bg-amber-100 text-amber-500",
+    description:
+      "Correct crop rectangles, split points, scripts, and caption tokens in dedicated editors before anything exports.",
+  },
+  {
+    icon: TrendingUp,
+    title: "Performance analytics",
     color: "bg-fuchsia-100 text-fuchsia-500",
     description:
-      "MIT licensed and community-driven. Fork it, self-host it, and ship your own video product.",
+      "Track views, retention, and revenue per exported short. Learn which hooks and caption styles win on each channel.",
   },
 ];
 
@@ -53,11 +59,11 @@ export function Features() {
     <section id="features" className="mx-auto max-w-6xl px-4 py-24 sm:px-6">
       <div className="mx-auto max-w-2xl text-center">
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-          Everything you need to create
+          Everything your shorts operation needs
         </h2>
         <p className="mt-4 text-muted-foreground">
-          A focused toolkit for going from idea to finished video — without the
-          production overhead.
+          A complete pipeline from owned long-form content to publishable,
+          monetization-ready shorts — with human review built in at every step.
         </p>
       </div>
 

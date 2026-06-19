@@ -1,16 +1,21 @@
 export const siteConfig = {
-  name: "VolfPack",
-  tagline: "Turn words into video.",
+  name: "Video Enigma",
+  tagline: "Your shorts factory.",
   description:
-    "VolfPack is an open-source text-to-video AI. Describe a scene in plain language and generate cinematic video in seconds.",
-  url: "https://volfpack.ai",
-  github: "https://github.com/volfpack/volfpack",
-  twitter: "https://twitter.com/volfpack",
+    "Video Enigma turns your long-form video library into a predictable short-form revenue pipeline. Local when privacy matters, hosted when your team needs speed.",
+  url: "https://videoenigma.ai",
+  github: "https://github.com/volfpackonline",
   ogImage: "/og.png",
   nav: [
-    { title: "Features", href: "/#features" },
-    { title: "How it works", href: "/#how-it-works" },
-    { title: "Generate", href: "/generate" },
+    { title: "Features", href: "/features" },
+    { title: "How it works", href: "/how-it-works" },
+    { title: "Use cases", href: "/use-cases" },
+    { title: "Open source", href: "/open-source" },
+  ],
+  builders: [
+    { handle: "cxprakash", twitter: "https://x.com/cxprakash" },
+    { handle: "iamsausii", twitter: "https://x.com/iamsausii" },
+    { handle: "msuraj025", twitter: "https://x.com/msuraj025" },
   ],
 } as const;
 

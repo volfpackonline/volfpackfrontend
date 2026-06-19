@@ -33,7 +33,7 @@ export function SiteHeader() {
           </Button>
           <ThemeToggle />
           <Button asChild className="ml-1">
-            <Link href="/generate">Start creating</Link>
+            <Link href="/generate">Process a video</Link>
           </Button>
         </div>
       </div>

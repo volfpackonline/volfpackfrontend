@@ -35,23 +35,32 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   keywords: [
-    "text to video",
-    "AI video generator",
-    "open source",
-    "generative video",
+    "AI shorts generator",
+    "long form to short form video",
+    "YouTube shorts automation",
+    "video repurposing tool",
+    "AI video pipeline",
+    "shorts factory",
+    "open source video AI",
+    "self-host video tool",
     siteConfig.name,
   ],
   openGraph: {
     type: "website",
     url: siteConfig.url,
-    title: siteConfig.name,
+    title: `${siteConfig.name} — ${siteConfig.tagline}`,
     description: siteConfig.description,
     siteName: siteConfig.name,
+    images: [{ url: "/og.png", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: siteConfig.name,
+    title: `${siteConfig.name} — ${siteConfig.tagline}`,
     description: siteConfig.description,
+    images: ["/og.png"],
+  },
+  alternates: {
+    canonical: siteConfig.url,
   },
 };
 

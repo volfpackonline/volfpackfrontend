@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Video Enigma - Product Requirements Document</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --background: #FFFDF9;
+    --foreground: #4A4458;
+    --card: #FFFFFF;
+    --muted: #F6F1FA;
+    --muted-fg: #8B8398;
+    --primary: #A78BFA;
+    --primary-soft: #C9B8F5;
+    --accent: #FFD6E8;
+    --pink: #FFB3D1;
+    --mint: #A8E6CF;
+    --peach: #FFD9B3;
+    --sky: #BFE3FF;
+    --border: #EFE7F2;
+    --radius: 1.25rem;
+    --shadow-cute: 0 10px 30px -12px rgba(167, 139, 250, 0.35), 0 4px 12px -6px rgba(167, 139, 250, 0.15);
+    --font-heading: "Baloo 2", system-ui, sans-serif;
+    --font-sans: "Quicksand", system-ui, sans-serif;
+    --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    color: var(--foreground);
+    background: var(--background);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 1.25rem; }
+
+  header.hero {
+    text-align: center;
+    padding: 4.5rem 1.25rem 2.5rem;
+    background:
+      linear-gradient(180deg, rgba(246, 241, 250, 0.72) 0%, rgba(255, 253, 249, 0) 78%),
+      var(--background);
+  }
+
+  .eyebrow {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--primary);
+    background: var(--muted);
+    padding: 0.4rem 1rem;
+    border-radius: 999px;
+    margin-bottom: 1.25rem;
+  }
+
+  h1 {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: clamp(2.4rem, 6vw, 3.6rem);
+    margin: 0 0 0.75rem;
+    text-wrap: balance;
+    background: linear-gradient(120deg, var(--primary) 0%, var(--pink) 70%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .lede {
+    font-size: 1.15rem;
+    max-width: 46rem;
+    margin: 0 auto 1.75rem;
+    color: var(--foreground);
+  }
+
+  .meta-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+
+  .chip {
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-cute);
+  }
+  .chip.lav { background: var(--muted); color: var(--primary); }
+  .chip.pink { background: var(--accent); }
+  .chip.mint { background: var(--mint); }
+  .chip.peach { background: var(--peach); }
+  .chip.sky { background: var(--sky); }
+
+  nav.toc {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-cute);
+    padding: 1.5rem 1.75rem;
+    margin: 2rem 0 3rem;
+  }
+  nav.toc h2 {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    margin: 0 0 0.75rem;
+  }
+  nav.toc ol {
+    columns: 2;
+    column-gap: 2rem;
+    margin: 0;
+    padding-left: 1.1rem;
+    font-size: 0.95rem;
+  }
+  nav.toc a { color: var(--foreground); text-decoration: none; }
+  nav.toc a:hover { color: var(--primary); }
+
+  section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-cute);
+    padding: 2rem 2.25rem;
+    margin-bottom: 1.75rem;
+    scroll-margin-top: 1.5rem;
+  }
+  section.flag {
+    border: 2px solid var(--primary-soft);
+    background: linear-gradient(180deg, #FBF8FF 0%, var(--card) 60%);
+  }
+  section.danger {
+    border: 2px solid var(--pink);
+    background: linear-gradient(180deg, #FFF4F8 0%, var(--card) 60%);
+  }
+
+  h2.sec {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.6rem;
+    margin: 0 0 1rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+  }
+  h2.sec .num {
+    font-size: 1rem;
+    color: var(--primary);
+    background: var(--muted);
+    border-radius: 999px;
+    padding: 0.15rem 0.7rem;
+  }
+  h3 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.15rem;
+    margin: 1.5rem 0 0.5rem;
+  }
+  p { margin: 0.6rem 0; }
+  ul, ol { padding-left: 1.4rem; }
+  li { margin: 0.3rem 0; }
+
+  blockquote {
+    margin: 1rem 0;
+    padding: 0.9rem 1.25rem;
+    background: var(--muted);
+    border-left: 4px solid var(--primary-soft);
+    border-radius: 0 1rem 1rem 0;
+    font-style: italic;
+  }
+  blockquote strong { font-style: normal; }
+
+  .warn-box {
+    background: #FFF0F5;
+    border: 1px solid var(--pink);
+    border-left: 4px solid #e0608f;
+    border-radius: 0 1rem 1rem 0;
+    padding: 0.9rem 1.25rem;
+    margin: 1rem 0;
+  }
+
+  .decision-box {
+    background: #F7FFF9;
+    border: 1px solid var(--mint);
+    border-left: 4px solid #51B98C;
+    border-radius: 0 1rem 1rem 0;
+    padding: 0.9rem 1.25rem;
+    margin: 1rem 0;
+  }
+
+  strong { color: #3a3447; font-weight: 700; }
+
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    background: var(--muted);
+    padding: 0.12em 0.42em;
+    border-radius: 0.45rem;
+    color: #6b5fa8;
+  }
+  pre {
+    background: #2b2538;
+    color: #e8e2f5;
+    border-radius: 1rem;
+    padding: 1.1rem 1.25rem;
+    overflow-x: auto;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    line-height: 1.5;
+    box-shadow: var(--shadow-cute);
+  }
+  pre code { background: none; color: inherit; padding: 0; }
+
+  .tbl-scroll { overflow-x: auto; margin: 1rem 0; }
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 0.9rem;
+    min-width: 520px;
+  }
+  th, td {
+    text-align: left;
+    padding: 0.65rem 0.85rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  thead th {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--primary);
+    background: var(--muted);
+    border-bottom: none;
+  }
+  thead th:first-child { border-top-left-radius: 0.75rem; }
+  thead th:last-child { border-top-right-radius: 0.75rem; }
+  tbody tr:hover { background: #FBF9FE; }
+
+  .pill {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.1rem 0.55rem;
+    border-radius: 999px;
+    font-family: var(--font-heading);
+  }
+  .p0 { background: var(--pink); color: #8a2b53; }
+  .p1 { background: var(--peach); color: #8a5a23; }
+  .p2 { background: var(--sky); color: #2a5a7a; }
+  .yes { color: #2e8b6b; font-weight: 700; }
+  .no { color: #c25b7d; font-weight: 700; }
+
+  footer {
+    text-align: center;
+    padding: 2.5rem 1.25rem 4rem;
+    color: var(--muted-fg);
+    font-size: 0.9rem;
+  }
+  footer a { color: var(--primary); text-decoration: none; }
+
+  @media print {
+    body { background: #fff; }
+    section, nav.toc { box-shadow: none; border: 1px solid #ddd; break-inside: avoid; }
+    nav.toc { display: none; }
+    h1 { -webkit-text-fill-color: #7a5fc8; color: #7a5fc8; }
+    a { color: inherit; text-decoration: none; }
+    pre { background: #f4f2f8; color: #2b2538; }
+  }
+
+  @media (max-width: 640px) {
+    nav.toc ol { columns: 1; }
+    section { padding: 1.5rem 1.25rem; }
+  }
+</style>
+</head>
+<body>
+  <header class="hero">
+    <span class="eyebrow">Product Requirements Document</span>
+    <h1>Video Enigma</h1>
+    <p class="lede">
+      A self-hostable and hosted <strong>AI shorts operating system</strong> that
+      turns owned long-form videos into publishable, monetization-ready short-form
+      clips with provider-agnostic AI, human review, and channel-level analytics.
+    </p>
+    <div class="meta-chips">
+      <span class="chip lav">Draft v1</span>
+      <span class="chip">Updated 2026-06-18</span>
+      <span class="chip pink">Merged PRD</span>
+      <span class="chip mint">FastAPI + React/Next</span>
+      <span class="chip peach">Creator monetization</span>
+      <span class="chip sky">Self-host + hosted</span>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <nav class="toc">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#s1">Executive decision</a></li>
+        <li><a href="#s2">Project comparison</a></li>
+        <li><a href="#s3">Vision &amp; problem</a></li>
+        <li><a href="#s4">Target users &amp; buyer</a></li>
+        <li><a href="#s5">Monetization strategy</a></li>
+        <li><a href="#s6">Goals, scope &amp; non-goals</a></li>
+        <li><a href="#s7">Core workflow</a></li>
+        <li><a href="#s8">Functional requirements</a></li>
+        <li><a href="#s9">Provider &amp; AI architecture</a></li>
+        <li><a href="#s10">Product surfaces</a></li>
+        <li><a href="#s11">System architecture</a></li>
+        <li><a href="#s12">Data model</a></li>
+        <li><a href="#s13">API contracts</a></li>
+        <li><a href="#s14">Metrics &amp; KPIs</a></li>
+        <li><a href="#s15">Risks &amp; mitigations</a></li>
+        <li><a href="#s16">Roadmap</a></li>
+        <li><a href="#s17">Open questions</a></li>
+      </ol>
+    </nav>
+
+    <section id="s1" class="flag">
+      <h2 class="sec"><span class="num">1</span> Executive decision</h2>
+      <blockquote><strong>Build Video Enigma as a vertical creator monetization product, not a generic text-to-video playground.</strong></blockquote>
+      <p>The best merged direction is to keep Video Enigma's concrete long-form-to-shorts pipeline as the product wedge and adopt VolfPack's provider abstraction, key custody, async orchestration, self-host distribution, and open-core monetization thinking as infrastructure.</p>
+      <div class="decision-box">
+        <p><strong>Final product thesis:</strong> creators and agencies do not primarily want "AI video generation." They want more publishable shorts, fewer editing hours, repeatable channel growth, and eventually more revenue. Video Enigma should sell that workflow outcome.</p>
+      </div>
+      <h3>What gets merged</h3>
+      <ul>
+        <li><strong>From Video Enigma:</strong> channels, projects, owned-source ingestion, download, crop, split, clean, transcribe, rewrite, TTS, word captions, assemble, manual editors, local-network deployment.</li>
+        <li><strong>From VolfPack:</strong> provider-agnostic model registry, BYO-key plus managed-key modes, durable async jobs, metering, cost visibility, self-host story, future hosted/open-core tiers, and honest moat analysis.</li>
+      </ul>
+      <h3>What to avoid</h3>
+      <p>Do not dilute the product into a broad "generate any video from text" tool. Text-to-video can be an optional insert/b-roll provider later, but the core paid workflow is <strong>repurposing existing owned content into monetizable shorts</strong>.</p>
+    </section>
+
+    <section id="s2">
+      <h2 class="sec"><span class="num">2</span> Project comparison</h2>
+      <div class="tbl-scroll">
+        <table>
+          <thead><tr><th>Dimension</th><th>Video Enigma / VideoPy</th><th>VolfPack</th><th>Merged decision</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Product shape</strong></td><td>Specific shorts repurposing pipeline for owned channels</td><td>Horizontal text-to-video control plane</td><td>Use the vertical pipeline as the business; keep control-plane ideas under the hood</td></tr>
+            <tr><td><strong>Primary user</strong></td><td>Creator/operator with multiple channels and a small team</td><td>Developer/self-hoster with provider keys</td><td>Start with creator-operators and agencies; keep developer/self-host appeal for distribution</td></tr>
+            <tr><td><strong>Workflow depth</strong></td><td>High: crop editor, timeline, script editor, caption editor</td><td>Medium: prompt, render, history, providers</td><td>Workflow depth is the differentiator and pricing justification</td></tr>
+            <tr><td><strong>AI surface</strong></td><td>Whisper, OpenAI, ElevenLabs, EasyOCR, Bark notes</td><td>LLM and video provider adapters, local models, cost routing</td><td>Create a generic provider registry for STT, LLM, TTS, video, OCR, and optional b-roll</td></tr>
+            <tr><td><strong>Monetization</strong></td><td>Implicit: help YouTube channels generate shorts</td><td>Explicit: free self-host, paid managed cloud, enterprise modules</td><td>Charge for saved editing labor and revenue workflow, not for raw model access</td></tr>
+            <tr><td><strong>Moat</strong></td><td>Domain workflow and editorial data</td><td>Model orchestration and possible data flywheel</td><td>Moat comes from vertical approval/performance data and channel-specific templates</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>Resulting positioning</h3>
+      <blockquote>Video Enigma is the "shorts factory" for creators and agencies with owned long-form libraries: local when privacy/cost matters, hosted when speed/team workflow matters.</blockquote>
+    </section>
+
+    <section id="s3">
+      <h2 class="sec"><span class="num">3</span> Vision &amp; problem</h2>
+      <h3>The problem</h3>
+      <p>Creators often have hours of valuable long-form content but fail to convert it into short-form inventory because the work is repetitive, slow, and editorially fragile. The manual loop is familiar: pick a source video, find good moments, crop landscape to vertical, cut filler, rewrite for shorts pacing, record or generate audio, time captions, assemble, review, export, and repeat.</p>
+      <p>Generic AI video tools do not solve this. They generate new clips, but they do not understand a creator's archive, channel style, approval needs, publishing cadence, or revenue goal.</p>
+      <h3>The vision</h3>
+      <blockquote><strong>Turn existing long-form content into a predictable short-form revenue pipeline.</strong> Video Enigma should make a small team feel like a full shorts editing operation.</blockquote>
+      <h3>Why now</h3>
+      <ul>
+        <li>STT, LLM rewriting, TTS, OCR, caption timing, and video editing libraries are mature enough to automate most of the pipeline.</li>
+        <li>Creators and agencies already understand the business value of short-form distribution.</li>
+        <li>Local GPU and self-host workflows can reduce costs for heavy video processing while hosted tiers can monetize convenience.</li>
+      </ul>
+    </section>
+
+    <section id="s4">
+      <h2 class="sec"><span class="num">4</span> Target users &amp; buyer</h2>
+      <p>For v1, optimize for the original Video Enigma user: an operator with multiple owned YouTube channels and a two-person production team. For commercialization, package the same workflow for creator teams and agencies.</p>
+      <div class="tbl-scroll">
+        <table>
+          <thead><tr><th>Persona</th><th>Description</th><th>Core need</th><th>Priority</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Channel Operator</strong></td><td>Owns several YouTube channels and wants a local/private workflow</td><td>Batch repurposing, channel configs, minimal manual effort</td><td><span class="pill p0">P0</span></td></tr>
+            <tr><td><strong>Shorts Editor</strong></td><td>Team member reviewing scripts, split points, captions, and exports</td><td>Fast correction tools and clear pipeline status</td><td><span class="pill p0">P0</span></td></tr>
+            <tr><td><strong>Creator Team</strong></td><td>Small content business with recurring long-form output</td><td>Publishable clips every week, consistent brand style</td><td><span class="pill p1">P1</span></td></tr>
+            <tr><td><strong>Agency / Multi-client Team</strong></td><td>Repurposes content for many client channels</td><td>Workspaces, approvals, quotas, white-label exports</td><td><span class="pill p1">P1</span></td></tr>
+            <tr><td><strong>Enterprise / Offline Buyer</strong></td><td>Wants self-hosted media processing behind a firewall</td><td>SSO, audit, support, offline/local GPU path</td><td><span class="pill p2">P2</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Non-users for v1:</strong> one-off consumers making casual clips, social media schedulers without editing needs, and users trying to repurpose content they do not own or have rights to use.</p>
+    </section>
+
+    <section id="s5" class="flag">
+      <h2 class="sec"><span class="num">5</span> Monetization strategy</h2>
+      <blockquote><strong>Final monetization goal:</strong> sell more publishable shorts per operator-hour, with clear ROI against manual editing cost and channel revenue upside.</blockquote>
+      <h3>Pricing architecture</h3>
+      <div class="tbl-scroll">
+        <table>
+          <thead><tr><th>Tier</th><th>Target</th><th>Packaging</th><th>Revenue logic</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Community self-host</strong></td><td>Developers, solo creators, privacy-first users</td><td>Free core, BYO keys, local storage, limited support</td><td>Adoption funnel, trust, OSS credibility, future upgrade path</td></tr>
+            <tr><td><strong>Creator hosted</strong></td><td>Small creator teams</td><td>Monthly subscription, managed hosting, 2-5 channels, usage limits</td><td>Charge for convenience and saved editing time</td></tr>
+            <tr><td><strong>Agency</strong></td><td>Multi-client production teams</td><td>Workspaces, roles, approvals, client exports, priority queue</td><td>Higher ARPU because every client adds recurring volume</td></tr>
+            <tr><td><strong>Enterprise / offline</strong></td><td>Studios, education, regulated media teams</td><td>Annual license, self-host support, SSO, audit logs, SLA</td><td>Support and control, not AI credits, justify contract pricing</td></tr>
+            <tr><td><strong>Managed credits</strong></td><td>Hosted users who do not want separate AI accounts</td><td>Optional credits for STT, LLM, TTS, stock/video inserts</td><td>Margin on convenience, capped by transparent metering</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>Recommended first commercial ladder</h3>
+      <ol>
+        <li><strong>Free self-host:</strong> single workspace, BYO keys, unlimited local processing, no managed storage.</li>
+        <li><strong>Creator Pro:</strong> hosted app, 5 channels, batch jobs, managed storage, review queue, export presets.</li>
+        <li><strong>Agency:</strong> multi-workspace, client branding, approval links, team roles, usage reporting.</li>
+        <li><strong>Enterprise self-host:</strong> paid support, SSO, audit logs, private registry images, deployment help.</li>
+      </ol>
+      <h3>Why this is monetizable</h3>
+      <ul>
+        <li>The buyer can compare price to editor hours saved, not only to model API cost.</li>
+        <li>The workflow owns the revenue path from source video to short export, not just one AI call.</li>
+        <li>Hosted tiers can accumulate anonymized approval and performance data when users opt in, improving segment scoring and templates.</li>
+        <li>Agency workflows create natural expansion: more clients, channels, reviewers, storage, and exports.</li>
+      </ul>
+      <div class="warn-box">
+        <p><strong>Do not make managed AI credits the primary business.</strong> Provider resale margin is fragile. The durable revenue is workflow, team operations, analytics, support, and outcome-specific automation.</p>
+      </div>
+    </section>
+
+    <section id="s6">
+      <h2 class="sec"><span class="num">6</span> Goals, scope &amp; non-goals</h2>
+      <h3>v1 goals</h3>
+      <ol>
+        <li>Process a YouTube/direct video URL into one or more vertical shorts with generated audio and captions.</li>
+        <li>Support multiple channels, channel-level default configurations, and multiple projects per channel.</li>
+        <li>Expose pipeline progress for download, crop, split, transcription, rewrite, TTS, captions, and assembly.</li>
+        <li>Provide human correction tools for crop, split points, scripts, and word-level captions.</li>
+        <li>Use provider abstractions for STT, LLM, TTS, OCR, and optional video/b-roll generation.</li>
+        <li>Run locally on a production PC via Docker, with a clean path to hosted deployment.</li>
+      </ol>
+      <h3>v1 non-goals</h3>
+      <ul>
+        <li>Full professional NLE replacement.</li>
+        <li>Native mobile app.</li>
+        <li>Automatic upload/publishing before review controls are reliable.</li>
+        <li>General text-to-video studio as the main surface.</li>
+        <li>Complex account system for the original local two-person deployment.</li>
+      </ul>
+    </section>
+
+    <section id="s7">
+      <h2 class="sec"><span class="num">7</span> Core workflow</h2>
+      <pre><code>Channel setup
+  create channel - configure defaults - attach source channels
+
+Project intake
+  URL/upload/import - metadata - rights/ownership confirmation
+
+Source analysis
+  download - extract audio - transcribe - score repurposability
+
+Short creation
+  find moments - crop vertical - split - clean frames - rewrite script
+
+Voice and captions
+  TTS - align words - style captions - edit caption tokens
+
+Assembly and review
+  attach audio - burn captions - export - approve - publish/schedule
+
+Performance loop
+  collect results - learn winning hooks/templates - improve next batch</code></pre>
+      <h3>Pipeline phases</h3>
+      <div class="tbl-scroll">
+        <table>
+          <thead><tr><th>Phase</th><th>Automation</th><th>Human control</th><th>Output</th></tr></thead>
+          <tbody>
+            <tr><td>Source selection</td><td>Search owned channels, rank candidate videos by topic and reuse potential</td><td>Approve selected source</td><td>Project with source video</td></tr>
+            <tr><td>Download</td><td>yt-dlp primary, PyTubeFix fallback, metadata extraction</td><td>Retry or replace URL</td><td>Local/source asset</td></tr>
+            <tr><td>Crop</td><td>AI crop, podcast crop, default crop rectangle</td><td>Interactive crop editor</td><td>Vertical crop config</td></tr>
+            <tr><td>Split</td><td>LLM/transcript-based segment discovery, min/max duration constraints</td><td>Timeline split point editor</td><td>Segment list</td></tr>
+            <tr><td>Clean</td><td>Face/text frame detection, EasyOCR text cleanup where configured</td><td>Review rejected frames</td><td>Cleaned segment video</td></tr>
+            <tr><td>Transcript/rewrite</td><td>Whisper timestamps and LLM rewrite for shorts pacing</td><td>Script editor and factual checks</td><td>TTS-ready script</td></tr>
+            <tr><td>TTS/captions</td><td>ElevenLabs/Bark/local voice, word alignment, caption style</td><td>Caption token editor</td><td>Audio and timed captions</td></tr>
+            <tr><td>Assemble</td><td>FFmpeg composition, audio attach, caption burn-in, export presets</td><td>Approve final short</td><td>Downloadable/publishable file</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="s8">
+      <h2 class="sec"><span class="num">8</span> Functional requirements</h2>
+      <p>Priority: <span class="pill p0">P0</span> must-have, <span class="pill p1">P1</span> should-have, <span class="pill p2">P2</span> later.</p>
+      <h3>8.1 Channel and project management</h3>
+      <div class="tbl-scroll">
+        <table>
+          <thead><tr><th>ID</th><th>Requirement</th><th>Pri</th></tr></thead>
+          <tbody>
+            <tr><td>FR-1.1</td><td>Create, edit, delete, and mark default channels</td><td><span class="pill p0">P0</span></td></tr>
+            <tr><td>FR-1.2</td><td>Store channel defaults for crop, split, STT, LLM, TTS, captions, language, and final attach behavior</td><td><span class="pill p0">P0</span></td></tr>
+            <tr><td>FR-1.3</td><td>Create projects from URL/upload/import and inherit channel defaults</td><td><span class="pill p0">P0</span></td></tr>
+            <tr><td>FR-1.4</td><td>Display recent projects by channel on the landing page</td><td><span class="pill p0">P0</span></td></tr>
+            <tr><td>FR-1.5</td><td>Support workspaces and multi-client organization for agency tier</td><td><span class="pill p1">P1</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>8.2 Processing pipeline</h3>
+      <div class="tbl-scroll">
+        <table>
+          <thead><tr><th>ID</th><th>Requirement</th><th>Pri</th></tr></thead>
+          <tbody>
+            <tr><td>FR-2.1</td><td>Run each phase as a durable async job with status, progress, logs, retry, and error reason</td><td><span class="pill p0">P0</span></td></tr>
+            <tr><td>FR-2.2</td><td>Support full pipeline run and resume from failed/incomplete phases</td><td><span class="pill p0">P0</span></td></tr>
+            <tr><td>FR-2.3</td><td>Download video/audio and store technical metadata such as resolution, FPS, duration, codec, and audio sample rate</td><td><span class="pill p0">P0</span></td></tr>
+            <tr><td>FR-2.4</td><td>Generate vertical crop configs with AI/podcast/default strategies</td><td><span class="pill p0">P0</span></td></tr>
+            <tr><td>FR-2.5</td><td>Find candidate segments using transcript, duration limits, and channel strategy</td><td><span class="pill p0">P0</span></td></tr>
+            <tr><td>FR-2.6</td><td>Transcribe source and segments with word-level timestamps where available</td><td><span class="pill p0">P0</span></td></tr>
+            <tr><td>FR-2.7</td><td>Rewrite scripts for hook, pacing, target language, time limit, and TTS friendliness</td><td><span class="pill p0">P0</span></td></tr>
+            <tr><td>FR-2.8</td><td>Generate TTS audio and estimate/validate final duration against segment constraints</td><td><span class="pill p0">P0</span></td></tr>
+            <tr><td>FR-2.9</td><td>Create word-level caption data and burn captions into final exports</td><td><span class="pill p0">P0</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>8.3 Review and editors</h3>
+      <div class="tbl-scroll">
+        <table>
+          <thead><tr><th>ID</th><th>Requirement</th><th>Pri</th></tr></thead>
+          <tbody>
+            <tr><td>FR-3.1</td><td>Interactive crop page with visible crop rectangle and faded discarded area</td><td><span class="pill p0">P0</span></td></tr>
+            <tr><td>FR-3.2</td><td>Timeline editor for segment split points, including add/remove/adjust</td><td><span class="pill p0">P0</span></td></tr>
+            <tr><td>FR-3.3</td><td>Script editor per segment with copy, factual-risk check, and TTS friendliness check</td><td><span class="pill p0">P0</span></td></tr>
+            <tr><td>FR-3.4</td><td>Caption data editor with collapsible segments and editable word/timestamp rows</td><td><span class="pill p0">P0</span></td></tr>
+            <tr><td>FR-3.5</td><td>Approval queue for final shorts before download or publishing</td><td><span class="pill p1">P1</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>8.4 Monetization and analytics</h3>
+      <ul>
+        <li><strong>Export tracking:</strong> record generated clips, duration, source video, channel, and reviewer <span class="pill p0">P0</span>.</li>
+        <li><strong>Manual performance import:</strong> capture views, retention, likes, revenue estimate, and publish date <span class="pill p1">P1</span>.</li>
+        <li><strong>Publishing integrations:</strong> YouTube upload/scheduling after approval <span class="pill p1">P1</span>.</li>
+        <li><strong>Template learning:</strong> recommend hooks, caption styles, and segment types that perform for each channel <span class="pill p2">P2</span>.</li>
+        <li><strong>Billing/metering:</strong> usage events for hosted compute, storage, AI credits, seats, and exports <span class="pill p1">P1</span>.</li>
+      </ul>
+    </section>
+
+    <section id="s9" class="flag">
+      <h2 class="sec"><span class="num">9</span> Provider &amp; AI architecture</h2>
+      <p>VolfPack's strongest reusable idea is not the text-to-video surface; it is the provider abstraction. Video Enigma should generalize this across every AI step in the shorts pipeline.</p>
+      <h3>Provider classes</h3>
+      <div class="tbl-scroll">
+        <table>
+          <thead><tr><th>Class</th><th>Purpose</th><th>Initial providers</th><th>Key mode</th></tr></thead>
+          <tbody>
+            <tr><td><strong>DownloadProvider</strong></td><td>Fetch source videos and metadata</td><td>yt-dlp, PyTubeFix</td><td>No key / user auth later</td></tr>
+            <tr><td><strong>STTProvider</strong></td><td>Transcription with word timestamps</td><td>Whisper local, future hosted STT</td><td>Local or BYO/managed key</td></tr>
+            <tr><td><strong>LLMProvider</strong></td><td>Segment scoring, rewrite, metadata, factual checks</td><td>OpenAI first, LiteLLM-compatible providers later</td><td>BYO key or managed key</td></tr>
+            <tr><td><strong>TTSProvider</strong></td><td>Voice generation</td><td>ElevenLabs, Bark local</td><td>BYO key, managed key, or local GPU</td></tr>
+            <tr><td><strong>OCRProvider</strong></td><td>Text detection and cleanup decisions</td><td>EasyOCR</td><td>Local</td></tr>
+            <tr><td><strong>VideoProvider</strong></td><td>Optional generated inserts, intros, b-roll, backgrounds</td><td>VolfPack-style adapters later</td><td>BYO/managed/local</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>Adapter contract</h3>
+      <pre><code>ProviderAdapter
+  capabilities()      # model, languages, max duration, cost hint, local requirements
+  validate(request)   # reject impossible or expensive work before queueing
+  submit(request)     # start job or run local task
+  poll(job_ref)       # progress and provider state
+  cancel(job_ref)     # best-effort cancellation
+  normalize(result)   # common response shape for the pipeline</code></pre>
+      <h3>Key handling modes</h3>
+      <ol>
+        <li><strong>Local self-host:</strong> secrets live in <code>.env</code>; keys never touch the browser.</li>
+        <li><strong>Hosted BYO-key:</strong> encrypted per workspace with envelope encryption; user pays provider directly.</li>
+        <li><strong>Managed key:</strong> Video Enigma pays providers, meters usage, and bills customer with margin.</li>
+      </ol>
+      <h3>Moat shift</h3>
+      <blockquote>The defensible layer is not "we call many models." It is knowing which segments, hooks, caption styles, voices, and pacing patterns turn a specific channel's archive into high-performing shorts.</blockquote>
+    </section>
+
+    <section id="s10">
+      <h2 class="sec"><span class="num">10</span> Product surfaces</h2>
+      <h3>Landing dashboard</h3>
+      <ul>
+        <li>Appbar with workspace/channel selector and global job status.</li>
+        <li>Create Channel and Create Project actions.</li>
+        <li>Channel sections showing the four most recently updated projects.</li>
+        <li>System health summary for local services, queue, storage, and provider keys.</li>
+      </ul>
+      <h3>Channel page</h3>
+      <ul>
+        <li>Edit channel name, description, source channels, and defaults.</li>
+        <li>Configuration grouped by pipeline phase for fast scanning.</li>
+        <li>Project grid with status, last run, generated shorts, and review count.</li>
+        <li>Analytics placeholder in v1; real performance charts in P1/P2.</li>
+      </ul>
+      <h3>Project page</h3>
+      <ul>
+        <li>Breadcrumb: channel name, project name.</li>
+        <li>Original source URL with copy/open actions.</li>
+        <li>Phase cards for download, crop, editing, transcription, rewrite, TTS, captions, assembly, and final review.</li>
+        <li>Each phase shows progress, current job, errors, retry, inspect, and editor entry points.</li>
+        <li>Primary action: Process Video, continuing from the next incomplete phase.</li>
+      </ul>
+      <h3>Editor pages</h3>
+      <ul>
+        <li><strong>Crop editor:</strong> video preview, timeline, crop rectangle, dimensions, aspect ratio, AI/podcast toggles.</li>
+        <li><strong>Video editor:</strong> lightweight timeline, cuts, segment markers, crop overlay preview.</li>
+        <li><strong>Script editor:</strong> segment text boxes, AI rewrite variants, copy, factual check, TTS check.</li>
+        <li><strong>Caption editor:</strong> collapsible segments, word/timestamp rows, preview with selected caption style.</li>
+      </ul>
+    </section>
+
+    <section id="s11">
+      <h2 class="sec"><span class="num">11</span> System architecture</h2>
+      <pre><code>Browser UI (React/Next)
+  dashboard - channel/project pages - crop/timeline/script/caption editors
+        |
+        | REST/JSON, SSE or polling for progress
+        v
+Web/BFF layer
+  session/workspace - request validation - key never exposed to browser
+        |
+        v
+Python API (FastAPI)
+  channels - projects - source videos - jobs - provider registry
+        | enqueue                         | read/write
+        v                                 v
+Queue/Broker (Redis + RQ/Celery)       Postgres
+        |                                 channels, projects, segments,
+        v                                 scripts, captions, jobs, usage
+Workers
+  DownloadService - VideoService - TranscriptionService
+  AIService - TTSService - CaptionService - PublishService
+        |
+        v
+Storage
+  local data root for self-host - S3/R2/MinIO for hosted</code></pre>
+      <h3>Best architecture choice</h3>
+      <p>Keep the Python FastAPI service layer from Video Enigma because it matches FFmpeg, Whisper, EasyOCR, Bark, and video processing work. Use a Next.js-style BFF and hosted frontend when billing, auth, and managed deployment become important. The current React/Vite frontend can remain the prototype surface until the hosted product needs stronger routing, auth, and server-side integration.</p>
+      <h3>Non-functional requirements</h3>
+      <div class="tbl-scroll">
+        <table>
+          <thead><tr><th>ID</th><th>Category</th><th>Requirement</th></tr></thead>
+          <tbody>
+            <tr><td>NFR-1</td><td>Reliability</td><td>Jobs survive worker restart; pipeline can resume from last successful phase.</td></tr>
+            <tr><td>NFR-2</td><td>Performance</td><td>Project UI updates under 2 seconds; long media jobs show ETA and logs.</td></tr>
+            <tr><td>NFR-3</td><td>Cost visibility</td><td>Show expected and actual provider/compute cost per project in hosted mode.</td></tr>
+            <tr><td>NFR-4</td><td>Privacy</td><td>Self-hosted data stays local except chosen external providers; telemetry must be opt-in.</td></tr>
+            <tr><td>NFR-5</td><td>Security</td><td>Keys encrypted at rest in hosted mode; never logged, returned, or sent to the browser.</td></tr>
+            <tr><td>NFR-6</td><td>Portability</td><td>Docker Compose local install; path to hosted container deployment.</td></tr>
+            <tr><td>NFR-7</td><td>Maintainability</td><td>Services are independently testable; provider adapters have contract tests.</td></tr>
+            <tr><td>NFR-8</td><td>Accessibility</td><td>Keyboard-friendly editors, visible focus, readable captions, and reduced-motion support.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="s12">
+      <h2 class="sec"><span class="num">12</span> Data model</h2>
+      <pre><code>Workspace       (id, name, plan, billing_status, created_at)
+User            (id, workspace_id, email, role, created_at)          # hosted/agency
+ProviderKey     (id, workspace_id, provider, ciphertext, mode)
+
+Channel         (id, workspace_id, name, description, is_default,
+                 defaults_json, source_channels_json, created_at)
+Project         (id, channel_id, name, source_url, status,
+                 config_json, created_at, updated_at)
+SourceVideo     (id, project_id, file_path, metadata_json, duration,
+                 width, height, fps, audio_metadata_json)
+CropConfig      (id, source_video_id, strategy, x, y, width, height,
+                 aspect_ratio, keyframes_json)
+Segment         (id, source_video_id, start_ms, end_ms, rank_score,
+                 status, hook_type, notes)
+
+Transcript      (id, segment_id?, source_video_id?, provider, text,
+                 language, words_json)
+ScriptDraft     (id, segment_id, version, text, provider,
+                 checks_json, approved_at)
+VoiceRender     (id, segment_id, provider, voice_id, audio_path,
+                 duration_ms, cost_actual)
+CaptionToken    (id, segment_id, word, start_ms, end_ms, style_json)
+Asset           (id, project_id, segment_id?, kind, storage_key,
+                 bytes, checksum, created_at)
+
+Job             (id, project_id, phase, status, progress, error,
+                 provider, provider_job_id, started_at, finished_at)
+UsageEvent      (id, workspace_id, project_id, provider, units,
+                 unit_type, cost_actual, created_at)
+PerformanceSnap (id, segment_id, platform, views, retention_pct,
+                 likes, revenue_estimate, captured_at)</code></pre>
+    </section>
+
+    <section id="s13">
+      <h2 class="sec"><span class="num">13</span> API contracts</h2>
+      <pre><code>GET    /api/v1/health
+
+POST   /api/v1/channels
+GET    /api/v1/channels
+GET    /api/v1/channels/default
+GET    /api/v1/channels/:id
+PUT    /api/v1/channels/:id
+DELETE /api/v1/channels/:id
+
+POST   /api/v1/projects
+GET    /api/v1/projects?channel_id=
+GET    /api/v1/projects/:id
+PUT    /api/v1/projects/:id
+DELETE /api/v1/projects/:id
+POST   /api/v1/projects/:id/process
+GET    /api/v1/projects/:id/jobs
+
+POST   /api/v1/projects/:id/source-video
+GET    /api/v1/projects/:id/source-video
+POST   /api/v1/source-videos/:id/crop
+GET    /api/v1/source-videos/:id/crop
+PUT    /api/v1/crops/:id
+
+GET    /api/v1/source-videos/:id/segments
+GET    /api/v1/segments/:id
+PUT    /api/v1/segments/:id
+POST   /api/v1/segments/:id/rewrite
+POST   /api/v1/segments/:id/tts
+GET    /api/v1/segments/:id/captions
+PUT    /api/v1/segments/:id/captions
+
+GET    /api/v1/jobs/:id
+PUT    /api/v1/jobs/:id
+GET    /api/v1/jobs/:id/stream
+
+GET    /api/v1/providers
+POST   /api/v1/provider-keys
+POST   /api/v1/provider-keys/:id/validate
+
+POST   /api/v1/exports/:segment_id/render
+GET    /api/v1/exports/:asset_id/download</code></pre>
+      <p>API responses should use a consistent envelope for errors: <code>{ "error": "...", "code": "...", "details": {} }</code>. Progress updates can start with polling and move to SSE when the UI needs smoother phase updates.</p>
+    </section>
+
+    <section id="s14">
+      <h2 class="sec"><span class="num">14</span> Metrics &amp; KPIs</h2>
+      <h3>North-star metric</h3>
+      <p><strong>Approved monetization-ready shorts per active channel per week.</strong> This captures the actual customer outcome better than jobs run or AI calls made.</p>
+      <h3>Product metrics</h3>
+      <ul>
+        <li>Time from source URL to first approved short.</li>
+        <li>Percentage of generated segments approved without major manual edits.</li>
+        <li>Pipeline success rate by phase and provider.</li>
+        <li>Average operator minutes per approved short.</li>
+        <li>Caption/script correction rate.</li>
+      </ul>
+      <h3>Business metrics</h3>
+      <ul>
+        <li>Hosted conversion from self-host installs.</li>
+        <li>MRR, ARPA, seat expansion, agency workspace expansion.</li>
+        <li>Gross margin after storage, compute, and managed provider credits.</li>
+        <li>Churn by failed activation, low output quality, or high AI cost.</li>
+      </ul>
+      <h3>Creator monetization metrics</h3>
+      <ul>
+        <li>Views, watch time, retention, subscribers, and revenue estimate per exported short.</li>
+        <li>Winning hook styles by channel and topic.</li>
+        <li>Revenue or growth lift per source video repurposed.</li>
+      </ul>
+    </section>
+
+    <section id="s15" class="danger">
+      <h2 class="sec"><span class="num">15</span> Risks &amp; mitigations</h2>
+      <div class="tbl-scroll">
+        <table>
+          <thead><tr><th>#</th><th>Risk</th><th>Likelihood</th><th>Impact</th><th>Mitigation</th></tr></thead>
+          <tbody>
+            <tr><td>R1</td><td>Scope creep into full NLE or generic AI video studio</td><td>High</td><td>High</td><td>Keep v1 centered on source-to-short workflow and four correction editors</td></tr>
+            <tr><td>R2</td><td>Generated shorts are not good enough to publish</td><td>High</td><td>High</td><td>Design human review as core, measure approval rate, improve prompts/templates</td></tr>
+            <tr><td>R3</td><td>AI/provider costs make hosted margins weak</td><td>Med</td><td>High</td><td>BYO-key option, local processing, transparent metering, charge for workflow subscription</td></tr>
+            <tr><td>R4</td><td>Copyright or unauthorized repurposing misuse</td><td>Med</td><td>High</td><td>Require ownership confirmation, source-channel allowlists, AUP, takedown workflow</td></tr>
+            <tr><td>R5</td><td>Local setup is too hard for creator users</td><td>Med</td><td>High</td><td>Hosted tier, Docker Compose, health checks, guided provider setup</td></tr>
+            <tr><td>R6</td><td>Video processing fails on edge-case codecs/resolutions</td><td>High</td><td>Med</td><td>Normalize sources early, retain logs, add fixture corpus and FFmpeg tests</td></tr>
+            <tr><td>R7</td><td>Provider API churn breaks STT/LLM/TTS flow</td><td>Med</td><td>Med</td><td>Adapter isolation, capability registry, contract tests, fallback providers</td></tr>
+            <tr><td>R8</td><td>Data flywheel conflicts with privacy self-hosting</td><td>High</td><td>Med</td><td>Use opt-in telemetry and accept that hosted tier drives shared learning</td></tr>
+            <tr><td>R9</td><td>Shorts revenue is unpredictable, weakening ROI story</td><td>Med</td><td>High</td><td>Sell labor savings first, revenue upside second; expose performance analytics honestly</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>Blunt assessment</h3>
+      <p>A horizontal VolfPack-style text-to-video tool is hard to monetize because it competes with model labs and has a weak moat. Video Enigma is stronger because it owns a repeated business workflow. The danger is building too much infrastructure and not enough publishable output quality.</p>
+    </section>
+
+    <section id="s16">
+      <h2 class="sec"><span class="num">16</span> Roadmap</h2>
+      <div class="tbl-scroll">
+        <table>
+          <thead><tr><th>Milestone</th><th>Scope</th><th>Exit criteria</th></tr></thead>
+          <tbody>
+            <tr><td><strong>M0 - Current foundation</strong></td><td>FastAPI routes/services, React frontend, channel/project concepts, processing service split</td><td>Docs and architecture understood; PRD merged</td></tr>
+            <tr><td><strong>M1 - Local MVP</strong></td><td>One local project from URL to exported short; download, crop, split, transcribe, rewrite, TTS, captions, assemble</td><td>One owned long-form video produces at least one reviewable short</td></tr>
+            <tr><td><strong>M2 - Human review tools</strong></td><td>Crop editor, split timeline, script editor, caption editor</td><td>Editor can correct generated output without touching files manually</td></tr>
+            <tr><td><strong>M3 - Channel batch workflow</strong></td><td>Channel defaults, project dashboard, batch source selection, resume/retry jobs</td><td>Team can process multiple projects across channels in one local install</td></tr>
+            <tr><td><strong>M4 - Provider registry</strong></td><td>Adapter contracts for STT, LLM, TTS, OCR; BYO keys; provider validation</td><td>At least two providers or modes exist for LLM/TTS and one local STT path</td></tr>
+            <tr><td><strong>M5 - Hosted beta</strong></td><td>Auth, workspaces, storage, metering, managed deployment, basic billing</td><td>First external creator team pays for hosted convenience</td></tr>
+            <tr><td><strong>M6 - Agency tier</strong></td><td>Multi-client workspaces, approvals, roles, performance import, white-label exports</td><td>Agency can manage recurring shorts production for multiple clients</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="s17">
+      <h2 class="sec"><span class="num">17</span> Open questions</h2>
+      <ol>
+        <li><strong>Brand:</strong> final product name should be Video Enigma or VideoPy Studio?</li>
+        <li><strong>Frontend direction:</strong> keep Vite for local app or migrate to Next.js when hosted/auth/billing work begins?</li>
+        <li><strong>First paid wedge:</strong> creator hosted tier or agency workflow?</li>
+        <li><strong>Voice strategy:</strong> rely on ElevenLabs quality first, or prioritize local Bark for cost/privacy?</li>
+        <li><strong>Publishing:</strong> when should YouTube upload/scheduling enter scope?</li>
+        <li><strong>Performance data:</strong> manual import first, YouTube API later, or direct integration in hosted beta?</li>
+        <li><strong>Open-source boundary:</strong> keep all core pipeline MIT and reserve hosted/team/billing modules for paid tiers?</li>
+      </ol>
+    </section>
+  </div>
+
+  <footer>
+    Video Enigma PRD - Draft v1 - 2026-06-18 - merged from Video Enigma docs and VolfPack PRD<br />
+    Created as <code>PRD_ENIGMA.html</code> in <code>volfpackfrontend</code>
+  </footer>
+</body>
+</html>
