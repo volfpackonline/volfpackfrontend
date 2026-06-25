@@ -42,11 +42,14 @@ export function HowItWorks() {
           </p>
         </div>
 
-        <div className="mt-14 grid gap-8 md:grid-cols-3">
+        <div className="relative mt-14 grid gap-8 md:grid-cols-3">
+          {/* Pipeline connector */}
+          <div className="pointer-events-none absolute left-[16%] right-[16%] top-16 hidden h-0.5 bg-gradient-to-r from-violet-300 via-pink-300 to-sky-300 md:block" />
+
           {steps.map((item) => (
             <div
               key={item.step}
-              className="rounded-3xl border border-border/60 bg-card p-7 text-center shadow-cute"
+              className="relative rounded-3xl border border-border/60 bg-card p-7 text-center shadow-cute transition-all duration-200 hover:-translate-y-1 hover:shadow-cute-lg"
             >
               <div
                 className={`mx-auto grid size-16 place-items-center rounded-2xl text-3xl ${item.color}`}

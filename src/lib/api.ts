@@ -1,13 +1,14 @@
-import type { GenerateRequest, VideoJob } from "@/lib/types";
+import type { ClipResult, IngestRequest } from "@/lib/types";
 
 /**
- * Kicks off a generation. Talks to the local mocked route by default; point
- * NEXT_PUBLIC_API_URL at a real backend to swap in live inference.
+ * Ingests a source URL and returns the produced short. Talks to the local
+ * mocked route by default; point NEXT_PUBLIC_API_URL at a real backend to swap
+ * in the live pipeline.
  */
-export async function generateVideo(
-  input: GenerateRequest,
+export async function ingestVideo(
+  input: IngestRequest,
   signal?: AbortSignal,
-): Promise<VideoJob> {
+): Promise<ClipResult> {
   const base = process.env.NEXT_PUBLIC_API_URL ?? "";
   const res = await fetch(`${base}/api/generate`, {
     method: "POST",
@@ -20,8 +21,8 @@ export async function generateVideo(
     const data = (await res.json().catch(() => null)) as
       | { error?: string }
       | null;
-    throw new Error(data?.error ?? "Generation failed. Please try again.");
+    throw new Error(data?.error ?? "Processing failed. Please try again.");
   }
 
-  return (await res.json()) as VideoJob;
+  return (await res.json()) as ClipResult;
 }

@@ -179,8 +179,118 @@
   animation: float-soft 9s ease-in-out infinite;
 }
 
+/* Horizontal marquee for the logo/pipeline ticker. */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@utility animate-marquee {
+  animation: marquee var(--marquee-duration, 32s) linear infinite;
+}
+
+/* Caption word "pop" used by the animated caption mock. */
+@keyframes caption-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(6px) scale(0.9);
+  }
+  18%,
+  82% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+}
+
+@utility animate-caption-pop {
+  animation: caption-pop 6s ease-in-out infinite;
+}
+
+/* Sweeping highlight used on the active pipeline phase + skeletons. */
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@utility animate-shimmer {
+  position: relative;
+  overflow: hidden;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in oklch, var(--primary) 14%, transparent),
+      transparent
+    );
+    animation: shimmer 1.8s ease-in-out infinite;
+  }
+}
+
+/* Slow vertical drift for the scanning bracket in the product mock. */
+@keyframes scan-y {
+  0%,
+  100% {
+    transform: translateY(-18%);
+  }
+  50% {
+    transform: translateY(18%);
+  }
+}
+
+@utility animate-scan-y {
+  animation: scan-y 4.5s ease-in-out infinite;
+}
+
+/* Gentle reveal-on-mount for stacked content. */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility animate-rise-in {
+  animation: rise-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Conic ring sweep behind the live pipeline progress badge. */
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@utility animate-spin-slow {
+  animation: spin-slow 3.5s linear infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .animate-float-soft {
+  .animate-float-soft,
+  .animate-marquee,
+  .animate-caption-pop,
+  .animate-scan-y,
+  .animate-rise-in,
+  .animate-spin-slow {
+    animation: none;
+  }
+  .animate-shimmer::after {
     animation: none;
   }
 }
