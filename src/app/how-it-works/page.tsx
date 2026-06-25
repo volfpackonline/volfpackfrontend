@@ -3,65 +3,65 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "How It Works",
   description:
-    "Learn how VolfPack turns a YouTube URL into a publish-ready short in eight automated pipeline phases — download, crop, split, transcribe, rewrite, TTS, captions, and assemble.",
+    "See how VolfPack turns one long video into ready-to-post shorts in eight simple steps — framing, best moments, captions, voiceover, and hooks all handled, with you approving the final cut.",
 };
 
 const phases = [
   {
     step: "01",
     color: "bg-violet-100 text-violet-600",
-    title: "Source selection & download",
+    title: "Add your video",
     description:
-      "Paste any YouTube URL (or upload a file). VolfPack fetches the video with yt-dlp, extracts audio, and stores technical metadata: resolution, FPS, duration, codec, and audio sample rate.",
+      "Paste a YouTube link or upload your podcast, vlog, or stream. That's all we need — VolfPack takes it from there.",
   },
   {
     step: "02",
     color: "bg-pink-100 text-pink-600",
-    title: "Vertical crop",
+    title: "Frame it vertical",
     description:
-      "An AI crop strategy (face-tracking, podcast, or custom rectangle) converts the landscape source into a 9:16 vertical frame. Review and adjust the crop rectangle in the interactive editor before anything renders.",
+      "Your wide video is reframed to fill a vertical screen, keeping the speaker or the action front and center. Prefer a different crop? Nudge it yourself in a couple of taps.",
   },
   {
     step: "03",
     color: "bg-sky-100 text-sky-600",
-    title: "Segment splitting",
+    title: "Find the best moments",
     description:
-      "The transcript is analysed by an LLM to find natural segment boundaries within your configured min/max duration. Use the timeline editor to add, remove, or nudge split points.",
+      "VolfPack watches the whole video and pulls out the clip-worthy bits — the stories, hot takes, and punchlines worth posting. Add or drop moments however you like.",
   },
   {
     step: "04",
     color: "bg-emerald-100 text-emerald-600",
-    title: "Frame cleaning",
+    title: "Clean up the screen",
     description:
-      "EasyOCR detects on-screen text (lower-thirds, watermarks) so the pipeline can flag or remove frames that would look wrong in the short.",
+      "Distracting on-screen text, old subtitles, and watermarks get spotted and cleared, so each short looks clean and made for vertical from the first frame.",
   },
   {
     step: "05",
     color: "bg-amber-100 text-amber-600",
-    title: "Transcription",
+    title: "Get the words right",
     description:
-      "Whisper (local) or a hosted STT provider transcribes the segment with word-level timestamps. The script editor lets you correct factual errors or adjust phrasing before the rewrite step.",
+      "Every word is captured with perfect timing. Skim the auto-written transcript and fix any names or phrasing before your captions are made.",
   },
   {
     step: "06",
     color: "bg-fuchsia-100 text-fuchsia-600",
-    title: "AI script rewrite",
+    title: "Sharpen the hook",
     description:
-      "An LLM rewrites the transcript for shorts pacing: strong hook in the first three seconds, tight mid-section, clear close. The rewrite respects your channel's language, tone, and target duration.",
+      "VolfPack tightens each clip for short-form: a scroll-stopping hook in the first three seconds, a punchy middle, and a clean payoff — all in your language and tone.",
   },
   {
     step: "07",
     color: "bg-rose-100 text-rose-600",
-    title: "TTS & caption alignment",
+    title: "Add voice & captions",
     description:
-      "ElevenLabs (hosted) or Bark (local GPU) converts the script to audio. Word timestamps are aligned automatically, then styled into animated captions that snap to each spoken word.",
+      "Drop in an optional natural-sounding voiceover, plus animated captions that highlight each word as it's spoken to keep viewers watching to the end.",
   },
   {
     step: "08",
     color: "bg-cyan-100 text-cyan-600",
-    title: "Assembly & export",
+    title: "Review & post",
     description:
-      "FFmpeg composites the cropped video, TTS audio, and burned-in captions into a single export file. Approve the final short in the review queue, then download or schedule it for publishing.",
+      "Your finished short lands in a review queue. Watch it, approve it, and download or schedule it for TikTok, Reels, and YouTube Shorts.",
   },
 ];
 
@@ -70,11 +70,11 @@ export default function HowItWorksPage() {
     <div className="mx-auto max-w-4xl px-4 py-20 sm:px-6">
       <div className="mb-16 text-center">
         <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-          From URL to publishable short
+          From one upload to ready-to-post
         </h1>
         <p className="mx-auto mt-5 max-w-2xl text-lg text-muted-foreground">
-          Eight automated phases, four human review editors, and one final
-          approval gate — so nothing ships until you say so.
+          Eight simple steps, fully handled for you — with the chance to tweak
+          anything along the way. Nothing posts until you approve it.
         </p>
       </div>
 
