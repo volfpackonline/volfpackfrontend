@@ -193,13 +193,13 @@ export function createOgImage() {
                 letterSpacing: "-1px",
               }}
             >
-              VE
+              VP
             </div>
             <div style={{ display: "flex", fontSize: 24, fontWeight: 700, color: INK }}>
               {siteConfig.name}
             </div>
             <div style={{ display: "flex", fontSize: 22, color: MUTED }}>
-              · videoenigma.ai
+              · volfpack.online
             </div>
           </div>
         </div>

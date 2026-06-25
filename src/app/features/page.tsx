@@ -13,7 +13,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 export const metadata: Metadata = {
   title: "Features",
   description:
-    "Explore every step of the Video Enigma pipeline: vertical crop, transcript, AI rewrite, TTS, word-level captions, human review editors, and channel analytics.",
+    "Explore every step of the VolfPack pipeline: vertical crop, transcript, AI rewrite, TTS, word-level captions, human review editors, and channel analytics.",
 };
 
 const sections = [
@@ -21,7 +21,7 @@ const sections = [
     icon: Scissors,
     color: "bg-violet-100 text-violet-500",
     title: "Full source-to-short pipeline",
-    body: "Paste a YouTube URL (or upload a file) and Video Enigma handles the rest: download with yt-dlp, crop landscape to 9:16, split at natural segment boundaries, clean frames, transcribe with Whisper, rewrite for shorts pacing, generate TTS audio, burn word-level captions, and assemble the final export — all in one durable async job.",
+    body: "Paste a YouTube URL (or upload a file) and VolfPack handles the rest: download with yt-dlp, crop landscape to 9:16, split at natural segment boundaries, clean frames, transcribe with Whisper, rewrite for shorts pacing, generate TTS audio, burn word-level captions, and assemble the final export — all in one durable async job.",
   },
   {
     icon: Layers,
@@ -51,7 +51,7 @@ const sections = [
     icon: TrendingUp,
     color: "bg-fuchsia-100 text-fuchsia-500",
     title: "Performance & analytics",
-    body: "Import views, retention, and revenue data per exported short. Over time, Video Enigma learns which hooks, caption styles, and segment types drive the best results on each channel and surfaces those patterns as recommended templates.",
+    body: "Import views, retention, and revenue data per exported short. Over time, VolfPack learns which hooks, caption styles, and segment types drive the best results on each channel and surfaces those patterns as recommended templates.",
   },
   {
     icon: Captions,

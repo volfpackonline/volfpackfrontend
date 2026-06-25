@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 export const metadata: Metadata = {
   title: "Use Cases",
   description:
-    "See how solo channel operators, creator teams, and agencies use Video Enigma to turn their long-form libraries into a consistent short-form revenue pipeline.",
+    "See how solo channel operators, creator teams, and agencies use VolfPack to turn their long-form libraries into a consistent short-form revenue pipeline.",
 };
 
 const useCases = [
@@ -17,7 +17,7 @@ const useCases = [
     persona: "Solo channel operator",
     headline: "Repurpose your entire back-catalogue without hiring an editor",
     story:
-      "You run two or three YouTube channels. Every long-form video is a gold mine of clip material, but cutting it manually takes hours you do not have. Video Enigma processes each video overnight: crops, splits, rewrites, voices, and captions — so you wake up to a queue of reviewable shorts ready to approve and post.",
+      "You run two or three YouTube channels. Every long-form video is a gold mine of clip material, but cutting it manually takes hours you do not have. VolfPack processes each video overnight: crops, splits, rewrites, voices, and captions — so you wake up to a queue of reviewable shorts ready to approve and post.",
     outcomes: [
       "Process a 45-minute video into 6–10 short candidates while you sleep",
       "Channel-level voice and caption style means every clip is on-brand automatically",
@@ -30,7 +30,7 @@ const useCases = [
     persona: "Small creator team",
     headline: "Give your editor a review queue instead of a raw timeline",
     story:
-      "Your team produces weekly long-form content. The bottleneck is converting it to shorts — an editor spends two days per video on something that should take twenty minutes. With Video Enigma, the pipeline handles the mechanical work and drops each segment into a script and caption editor. Your editor corrects and approves; the system exports.",
+      "Your team produces weekly long-form content. The bottleneck is converting it to shorts — an editor spends two days per video on something that should take twenty minutes. With VolfPack, the pipeline handles the mechanical work and drops each segment into a script and caption editor. Your editor corrects and approves; the system exports.",
     outcomes: [
       "Reduce shorts turnaround from days to under an hour of human review",
       "Script editor flags factual risks and TTS pronunciation issues before audio renders",
@@ -43,7 +43,7 @@ const useCases = [
     persona: "Content agency",
     headline: "Run shorts production for every client from one workspace",
     story:
-      "You manage short-form content for a roster of clients, each with their own channel style, language, and approval workflow. Video Enigma's agency tier gives every client a workspace with isolated channels, defaults, and exports — and lets you hand them an approval link without sharing your internal tools.",
+      "You manage short-form content for a roster of clients, each with their own channel style, language, and approval workflow. VolfPack's agency tier gives every client a workspace with isolated channels, defaults, and exports — and lets you hand them an approval link without sharing your internal tools.",
     outcomes: [
       "Multi-client workspaces with per-channel crop, voice, and language settings",
       "Client approval links that do not expose your internal pipeline",
@@ -56,7 +56,7 @@ const useCases = [
     persona: "Privacy-first operator",
     headline: "Run the full pipeline on your own hardware — data never leaves",
     story:
-      "You work with sensitive content or simply do not want your video archive on third-party servers. Video Enigma's self-hosted Docker Compose setup runs the entire pipeline locally — Whisper for transcription, Bark for TTS, FFmpeg for assembly — with external API calls only for the providers you explicitly configure.",
+      "You work with sensitive content or simply do not want your video archive on third-party servers. VolfPack's self-hosted Docker Compose setup runs the entire pipeline locally — Whisper for transcription, Bark for TTS, FFmpeg for assembly — with external API calls only for the providers you explicitly configure.",
     outcomes: [
       "Full pipeline runs entirely on a local GPU machine",
       "API keys stay in your .env file, never sent to a cloud service",

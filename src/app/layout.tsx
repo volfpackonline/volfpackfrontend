@@ -26,9 +26,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
-  ),
+  // Falls back to the real production domain (not localhost) so social-card
+  // image URLs resolve even when NEXT_PUBLIC_SITE_URL isn't set on the host.
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? siteConfig.url),
   title: {
     default: `${siteConfig.name} — ${siteConfig.tagline}`,
     template: `%s · ${siteConfig.name}`,

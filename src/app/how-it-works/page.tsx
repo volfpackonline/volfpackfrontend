@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "How It Works",
   description:
-    "Learn how Video Enigma turns a YouTube URL into a publish-ready short in eight automated pipeline phases — download, crop, split, transcribe, rewrite, TTS, captions, and assemble.",
+    "Learn how VolfPack turns a YouTube URL into a publish-ready short in eight automated pipeline phases — download, crop, split, transcribe, rewrite, TTS, captions, and assemble.",
 };
 
 const phases = [
@@ -12,7 +12,7 @@ const phases = [
     color: "bg-violet-100 text-violet-600",
     title: "Source selection & download",
     description:
-      "Paste any YouTube URL (or upload a file). Video Enigma fetches the video with yt-dlp, extracts audio, and stores technical metadata: resolution, FPS, duration, codec, and audio sample rate.",
+      "Paste any YouTube URL (or upload a file). VolfPack fetches the video with yt-dlp, extracts audio, and stores technical metadata: resolution, FPS, duration, codec, and audio sample rate.",
   },
   {
     step: "02",

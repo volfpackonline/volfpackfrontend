@@ -7,7 +7,7 @@ import { siteConfig } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Open Source",
   description:
-    "Video Enigma is MIT-licensed and fully self-hostable. Read about the open-core model, how to contribute, and why we build in public.",
+    "VolfPack is MIT-licensed and fully self-hostable. Read about the open-core model, how to contribute, and why we build in public.",
 };
 
 export default function OpenSourcePage() {

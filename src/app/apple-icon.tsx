@@ -45,7 +45,7 @@ export default function AppleIcon() {
             display: "flex",
           }}
         />
-        {/* VE monogram */}
+        {/* VP monogram */}
         <span
           style={{
             fontFamily: "system-ui, sans-serif",
@@ -56,7 +56,7 @@ export default function AppleIcon() {
             lineHeight: 1,
           }}
         >
-          VE
+          VP
         </span>
         {/* sub-label */}
         <span
@@ -69,7 +69,7 @@ export default function AppleIcon() {
             marginTop: 4,
           }}
         >
-          Video Enigma
+          VolfPack
         </span>
       </div>
     ),

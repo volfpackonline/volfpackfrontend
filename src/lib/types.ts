@@ -1,5 +1,5 @@
 /**
- * Domain model for the Video Enigma pipeline: a long-form source URL is ingested
+ * Domain model for the VolfPack pipeline: a long-form source URL is ingested
  * and run through eight phases to produce a publish-ready 9:16 short. These types
  * back both the Studio UI and the mocked /api/generate route.
  */

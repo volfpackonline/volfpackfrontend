@@ -5,7 +5,7 @@ const steps = [
     color: "bg-violet-100 text-violet-500",
     title: "Paste a video URL",
     description:
-      "Drop in a YouTube link (or upload a file). Video Enigma downloads the source, extracts audio, and scores it for repurposability.",
+      "Drop in a YouTube link (or upload a file). VolfPack downloads the source, extracts audio, and scores it for repurposability.",
   },
   {
     step: "2",

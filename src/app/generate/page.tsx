@@ -5,7 +5,7 @@ import { Studio } from "@/components/studio/studio";
 export const metadata: Metadata = {
   title: "Studio",
   description:
-    "Paste a long-form URL and watch the Video Enigma pipeline cut it into a publish-ready 9:16 short — crop, transcript, rewrite, voice, captions, assemble.",
+    "Paste a long-form URL and watch the VolfPack pipeline cut it into a publish-ready 9:16 short — crop, transcript, rewrite, voice, captions, assemble.",
 };
 
 export default function GeneratePage() {

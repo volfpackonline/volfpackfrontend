@@ -1,9 +1,9 @@
 export const siteConfig = {
-  name: "Video Enigma",
+  name: "VolfPack",
   tagline: "Your shorts factory.",
   description:
-    "Video Enigma turns your long-form video library into a predictable short-form revenue pipeline. Local when privacy matters, hosted when your team needs speed.",
-  url: "https://videoenigma.ai",
+    "VolfPack turns your long-form video library into a predictable short-form revenue pipeline. Local when privacy matters, hosted when your team needs speed.",
+  url: "https://www.volfpack.online",
   github: "https://github.com/volfpackonline",
   ogImage: "/og.png",
   nav: [

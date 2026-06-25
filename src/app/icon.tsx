@@ -31,7 +31,7 @@ export default function Icon() {
             display: "flex",
           }}
         />
-        {/* VE monogram */}
+        {/* VP monogram */}
         <span
           style={{
             fontFamily: "system-ui, sans-serif",
@@ -43,7 +43,7 @@ export default function Icon() {
             marginTop: 3,
           }}
         >
-          VE
+          VP
         </span>
       </div>
     ),
