@@ -13,16 +13,17 @@ export function CTA() {
         <div className="relative">
           <span className="text-4xl">📹✂️</span>
           <h2 className="mt-3 text-balance text-3xl font-bold tracking-tight sm:text-4xl">
-            Your long-form library is already full of shorts
+            Your back catalog is full of viral shorts
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-balance text-violet-900/80">
-            Self-host for free, bring your own API keys, and start shipping
-            publishable clips today. No editing suite required.
+            Stop letting great moments stay buried in long videos. Turn them
+            into scroll-stopping clips and post all week — starting today, for
+            free.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button asChild size="lg" className="h-12 px-8 text-base">
               <Link href="/generate">
-                Start processing videos
+                Make your first short
                 <ArrowRight className="size-4" />
               </Link>
             </Button>

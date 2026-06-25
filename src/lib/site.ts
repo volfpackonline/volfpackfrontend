@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "VolfPack",
   tagline: "Your shorts factory.",
   description:
-    "VolfPack turns your long-form video library into a predictable short-form revenue pipeline. Local when privacy matters, hosted when your team needs speed.",
+    "VolfPack turns one long video into a week of ready-to-post shorts — auto captions, vertical framing, voiceovers, and scroll-stopping hooks. No editing skills required.",
   url: "https://www.volfpack.online",
   github: "https://github.com/volfpackonline",
   ogImage: "/og.png",

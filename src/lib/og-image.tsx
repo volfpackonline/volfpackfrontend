@@ -9,7 +9,7 @@ import { siteConfig } from "@/lib/site";
  * are plain hex (no oklch).
  */
 
-export const ogAlt = `${siteConfig.name} — turn long-form video into publish-ready shorts`;
+export const ogAlt = `${siteConfig.name} — turn one long video into ready-to-post shorts`;
 export const ogSize = { width: 1200, height: 630 };
 export const ogContentType = "image/png";
 
@@ -19,11 +19,11 @@ const CREAM = "#fbfaf6";
 const BRAND_GRADIENT = "linear-gradient(90deg, #a78bfa 0%, #f472b6 50%, #38bdf8 100%)";
 
 const CHIPS = [
-  { label: "Crop", dot: "#8b5cf6" },
-  { label: "Transcribe", dot: "#38bdf8" },
-  { label: "Rewrite", dot: "#34d399" },
-  { label: "Voice", dot: "#f472b6" },
-  { label: "Captions", dot: "#fbbf24" },
+  { label: "Auto-clip", dot: "#8b5cf6" },
+  { label: "Captions", dot: "#38bdf8" },
+  { label: "Voiceover", dot: "#34d399" },
+  { label: "Hooks", dot: "#f472b6" },
+  { label: "Translate", dot: "#fbbf24" },
 ];
 
 const CAPTION_WORDS = ["Nobody", "tells", "you", "this", "about", "your", "first", "1,000"];
@@ -115,7 +115,7 @@ export function createOgImage() {
                 lineHeight: 1.05,
               }}
             >
-              Turn long-form into a
+              Turn one long video into
             </div>
             <div
               style={{
@@ -129,7 +129,7 @@ export function createOgImage() {
                 color: "transparent",
               }}
             >
-              shorts revenue machine
+              scroll-stopping shorts
             </div>
           </div>
 
@@ -142,8 +142,8 @@ export function createOgImage() {
               maxWidth: 560,
             }}
           >
-            Paste a YouTube URL — crop, transcribe, rewrite, voice, and caption,
-            all automated. Publish-ready shorts in minutes.
+            Paste a link to your podcast, vlog, or stream — get back
+            ready-to-post shorts with captions, framing, and hooks done for you.
           </div>
 
           <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 4 }}>

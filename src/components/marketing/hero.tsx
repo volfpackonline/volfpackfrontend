@@ -3,8 +3,18 @@ import { ArrowRight, Play, Star } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { CaptionPhone } from "@/components/caption-phone";
-import { PIPELINE_PHASES } from "@/lib/types";
 import { siteConfig } from "@/lib/site";
+
+// Creator-friendly highlights for the marquee — what they get, not how it works.
+const HIGHLIGHTS = [
+  "Finds your best moments",
+  "Auto vertical crop",
+  "Captions that pop",
+  "Punchier hooks",
+  "AI voiceover",
+  "Post in any language",
+  "Ready for TikTok, Reels & Shorts",
+];
 
 export function Hero() {
   return (
@@ -24,25 +34,25 @@ export function Hero() {
             className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card/70 px-4 py-1.5 text-sm text-muted-foreground shadow-cute backdrop-blur transition-colors hover:text-foreground"
           >
             <Star className="size-3.5 fill-amber-300 text-amber-300" />
-            100% open source — star us on GitHub ✨
+            100% free & open source ✨
           </Link>
 
           <h1 className="text-balance text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-            Turn your long-form library into a{" "}
-            <span className="text-gradient-brand">shorts revenue machine</span>
+            Turn one long video into a week of{" "}
+            <span className="text-gradient-brand">scroll-stopping shorts</span>
           </h1>
 
           <p className="mt-6 max-w-xl text-balance text-lg text-muted-foreground">
-            Paste a YouTube URL and the open-source pipeline does the heavy
-            lifting — crop, transcript, rewrite, TTS, captions, assemble — and
-            ships publishable shorts in minutes, not hours.
+            Paste a link to your podcast, vlog, or stream — and get back
+            ready-to-post clips with auto captions, perfect vertical framing,
+            and hooks that stop the scroll. No editing, no timeline, no burnout.
           </p>
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <Button asChild size="lg" className="h-12 px-7 text-base">
               <Link href="/generate">
                 <Play className="size-4" />
-                Process your first video
+                Make your first short
               </Link>
             </Button>
             <Button
@@ -59,7 +69,7 @@ export function Hero() {
           </div>
 
           <p className="mt-5 text-sm text-muted-foreground">
-            Free to self-host · BYO API keys · No vendor lock-in
+            Free to start · No editing experience needed · Post in minutes
           </p>
         </div>
 
@@ -97,16 +107,13 @@ export function Hero() {
         <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-background to-transparent" />
         <div className="flex overflow-hidden">
           <div className="animate-marquee flex shrink-0 items-center gap-3 pr-3">
-            {[...PIPELINE_PHASES, ...PIPELINE_PHASES].map((phase, i) => (
+            {[...HIGHLIGHTS, ...HIGHLIGHTS].map((highlight, i) => (
               <span
-                key={`${phase.id}-${i}`}
+                key={`${highlight}-${i}`}
                 className="inline-flex shrink-0 items-center gap-2 rounded-full border border-border/60 bg-card/70 px-3.5 py-1.5 text-xs font-medium text-muted-foreground"
               >
                 <span className="size-1.5 rounded-full bg-primary/70" />
-                {phase.label}
-                <span className="font-mono text-[10px] text-muted-foreground/70">
-                  {phase.engine}
-                </span>
+                {highlight}
               </span>
             ))}
           </div>

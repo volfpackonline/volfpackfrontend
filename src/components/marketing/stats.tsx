@@ -1,8 +1,8 @@
 const stats = [
-  { value: "8", label: "Automated phases", hint: "URL → export" },
-  { value: "45s", label: "Avg. review time", hint: "per short" },
-  { value: "6–10", label: "Shorts per video", hint: "from one source" },
-  { value: "0", label: "Vendor lock-in", hint: "BYO keys, MIT" },
+  { value: "6–10", label: "Shorts per video", hint: "from one upload" },
+  { value: "10×", label: "More posts", hint: "same effort" },
+  { value: "45s", label: "To review a clip", hint: "then post" },
+  { value: "0", label: "Editing skills needed", hint: "really" },
 ];
 
 export function Stats() {

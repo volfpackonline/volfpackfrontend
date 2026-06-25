@@ -1,6 +1,6 @@
 import {
   Captions,
-  GitBranch,
+  Languages,
   Layers,
   Mic2,
   Scissors,
@@ -22,47 +22,47 @@ type Feature = {
 const features: Feature[] = [
   {
     icon: Scissors,
-    title: "Source-to-short pipeline",
+    title: "One video, a dozen clips",
     color: "bg-violet-100 text-violet-500",
     description:
-      "Download, crop to vertical, split into segments, clean frames, transcribe, rewrite, and assemble — all from a single URL.",
+      "Drop in a long video and get back its best moments — already cut and framed for vertical. No scrubbing through footage to find the gold.",
     span: "lg:col-span-2",
   },
   {
     icon: Mic2,
-    title: "AI voice & captions",
+    title: "Captions & voiceovers that hook",
     color: "bg-pink-100 text-pink-500",
     description:
-      "TTS with ElevenLabs or local Bark, then word-level animated captions burned into the final export.",
+      "Word-by-word animated captions that keep viewers watching, plus natural-sounding voiceovers in the voice you choose.",
   },
   {
-    icon: GitBranch,
-    title: "Provider-agnostic AI",
+    icon: Languages,
+    title: "Reach a global audience",
     color: "bg-emerald-100 text-emerald-500",
     description:
-      "Swap STT, LLM, TTS, and OCR providers without rewriting the pipeline. BYO keys or use managed credits.",
+      "Turn one clip into shorts for every market — auto-translate and revoice your videos in the languages your fans speak.",
   },
   {
     icon: Layers,
-    title: "Channel-level defaults",
+    title: "Set your style once",
     color: "bg-sky-100 text-sky-500",
     description:
-      "Configure crop strategy, voice, language, and caption style per channel. Every new project inherits them instantly.",
+      "Pick your crop, voice, and caption look per channel. Every new short matches your brand automatically.",
   },
   {
     icon: Captions,
-    title: "Human review editors",
+    title: "You always have the final say",
     color: "bg-amber-100 text-amber-500",
     description:
-      "Correct crop rectangles, split points, scripts, and caption tokens in dedicated editors before anything exports.",
+      "Tweak the framing, wording, and captions before anything goes out. Post only the clips you actually love.",
     span: "lg:col-span-2",
   },
   {
     icon: TrendingUp,
-    title: "Performance analytics",
+    title: "See what's working",
     color: "bg-fuchsia-100 text-fuchsia-500",
     description:
-      "Track views, retention, and revenue per exported short. Learn which hooks and caption styles win on each channel.",
+      "Track views and watch-time on every clip, then lean into the hooks and styles your audience keeps coming back for.",
   },
 ];
 
@@ -71,11 +71,12 @@ export function Features() {
     <section id="features" className="mx-auto max-w-6xl px-4 py-24 sm:px-6">
       <div className="mx-auto max-w-2xl text-center">
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-          Everything your shorts operation needs
+          Everything you need to post more and edit less
         </h2>
         <p className="mt-4 text-muted-foreground">
-          A complete pipeline from owned long-form content to publishable,
-          monetization-ready shorts — with human review built in at every step.
+          From one upload to a queue of ready-to-post shorts — captions,
+          framing, voiceovers, and hooks all handled for you, with you in
+          control of the final cut.
         </p>
       </div>
 
