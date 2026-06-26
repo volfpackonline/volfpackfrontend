@@ -1,0 +1,3 @@
+# The Remotion ad project is a separate workspace with its own deps/tooling.
+# It is never imported by the web app — keep it out of the Vercel build.
+remotion
