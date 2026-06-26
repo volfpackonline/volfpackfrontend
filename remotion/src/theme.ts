@@ -35,6 +35,17 @@ export const theme = {
   gradient: "linear-gradient(90deg, #a78bfa 0%, #f472b6 50%, #38bdf8 100%)",
 } as const;
 
+/** Gentle dark theme (mirrors globals.css .dark — deep plum, never gray). */
+export const dark = {
+  bg: "#221A30",
+  bgDeep: "#1A1426",
+  card: "#2D2440",
+  ink: "#F3EDFA",
+  inkSoft: "#B5AAC8",
+  border: "rgba(255,255,255,0.12)",
+  primary: "#B9A4F7",
+} as const;
+
 // Signature soft, faintly-lavender lifted shadow (.shadow-cute).
 export const shadowCute = "0 2px 6px rgba(124,58,237,0.08), 0 18px 48px rgba(124,58,237,0.16)";
 

@@ -19,10 +19,55 @@ npm install
 ## Preview & render
 
 ```bash
-npm run dev      # open Remotion Studio to scrub/preview live
-npm run render   # → out/volfpack-ad.mp4  (1080×1920, 30fps, 30s)
-npm run still    # → out/frame.png (single frame, for a quick look)
+npm run dev      # open Remotion Studio to scrub/preview ALL compositions live
+npm run render   # → out/volfpack-ad.mp4  (the original, 30s)
+
+# Render any specific reel by composition id:
+npx remotion render Goldmine    out/Goldmine.mp4
+npx remotion render Secret      out/Secret.mp4
+npx remotion render Math        out/Math.mp4
+npx remotion render NotAnEditor out/NotAnEditor.mp4
+npx remotion render Freedom     out/Freedom.mp4
+npx remotion render Demo        out/Demo.mp4
 ```
+
+## The seven reels (all 1080×1920, 30fps)
+
+Each reel is a **different angle, visual language, theme, and bespoke component
+set** — deliberately not one template. Music is matched per mood.
+
+| id            | Angle                         | Look / theme                         | Track          | Len |
+| ------------- | ----------------------------- | ------------------------------------ | -------------- | --- |
+| `VolfPackAd`  | Pain / time (original)        | Light pastel, kinetic type           | sigma          | 30s |
+| `Goldmine`    | Loss aversion (back catalog)  | Warm cream + archive grid, sparkles  | acoustic-spring| 24s |
+| `Secret`      | Envy / social proof           | Light split-screen You-vs-Her        | joyful-funk    | 24s |
+| `Math`        | Volume / ROI                  | **Dark** analytics dashboard + charts| funk-breakbeat | 22s |
+| `NotAnEditor` | Skill barrier                 | **Dark** editor UI → dissolves → light| sigma         | 22s |
+| `Freedom`     | Burnout → freedom             | Continuous **night → morning** sky   | honey-kisses   | 28s |
+| `Demo`        | Show, don't tell              | Light app-UI, pipeline runs live     | funk-breakbeat | 18s |
+
+## Creative-zone batch (concept-first reels)
+
+Eight more, each inventing its own little world — heavier on bespoke components,
+deliberately no shared template.
+
+| id           | Concept                          | Signature device                              | Track          | Len |
+| ------------ | -------------------------------- | --------------------------------------------- | -------------- | --- |
+| `Factory`    | "Your shorts factory" (tagline)  | Conveyor belt + machine stations → shipped boxes | joyful-funk | 24s |
+| `Oddly`      | Oddly-satisfying, **no words**   | Long bar sliced → tiles snap into a grid       | honey-kisses   | 18s |
+| `TierList`   | Meme tier-list ranking           | Cards slot into S–F; VolfPack slams into S     | funk-breakbeat | 22s |
+| `TextThread` | iMessage story                   | Chat + typing dots + expanding in-chat demo    | sigma          | 22s |
+| `Speedrun`   | Any% speedrun overlay            | Live timer, split times, glitch "NEW RECORD!"  | funk-breakbeat | 20s |
+| `Footage`    | Anthropomorphized file (cute)    | File with blinking eyes begs; clip-characters escape | acoustic-spring | 20s |
+| `Recipe`     | Cooking-show recipe card         | Ingredients/method tick off; shorts "plated"   | acoustic-spring| 22s |
+| `Portal`     | Sci-fi clone machine             | Video enters a swirling portal; 8 clones exit  | funk-breakbeat | 20s |
+
+Render any: `npx remotion render <id> out/<id>.mp4`.
+
+Bespoke components live next to each reel in [`src/ads/`](src/ads). Shared
+brand pieces (PhoneMock, ShortCard, BrandMark, Chip) are in
+[`src/components/`](src/components); tokens in [`src/theme.ts`](src/theme.ts)
+(light + `dark`).
 
 ## Add sound (music + SFX)
 
