@@ -1,0 +1,23 @@
+{
+  "name": "volfpack-ad",
+  "version": "1.0.0",
+  "private": true,
+  "description": "VolfPack product ad — animated motion-graphics short built with Remotion, themed to design.md.",
+  "scripts": {
+    "dev": "remotion studio",
+    "render": "remotion render VolfPackAd out/volfpack-ad.mp4",
+    "still": "remotion still VolfPackAd out/frame.png --frame=540",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@remotion/google-fonts": "^4.0.0",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "remotion": "^4.0.0"
+  },
+  "devDependencies": {
+    "@remotion/cli": "^4.0.0",
+    "@types/react": "^19",
+    "typescript": "^5"
+  }
+}
