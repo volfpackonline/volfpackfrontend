@@ -4,6 +4,7 @@ export const metadata: Metadata = {
   title: "How It Works",
   description:
     "See how VolfPack turns one long video into ready-to-post shorts in eight simple steps — framing, best moments, captions, voiceover, and hooks all handled, with you approving the final cut.",
+  alternates: { canonical: "/how-it-works" },
 };
 
 const phases = [

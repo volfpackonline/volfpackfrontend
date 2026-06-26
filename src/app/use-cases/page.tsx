@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "Use Cases",
   description:
     "See how solo channel operators, creator teams, and agencies use VolfPack to turn their long-form libraries into a consistent short-form revenue pipeline.",
+  alternates: { canonical: "/use-cases" },
 };
 
 const useCases = [

@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   title: "Features",
   description:
     "Explore every step of the VolfPack pipeline: vertical crop, transcript, AI rewrite, TTS, word-level captions, human review editors, and channel analytics.",
+  alternates: { canonical: "/features" },
 };
 
 const sections = [
