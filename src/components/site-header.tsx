@@ -33,7 +33,7 @@ export function SiteHeader() {
           </Button>
           <ThemeToggle />
           <Button asChild className="ml-1">
-            <a href={siteConfig.signInUrl}>Process a video</a>
+            <a href={siteConfig.signInUrl}>Process video</a>
           </Button>
         </div>
       </div>
