@@ -10,8 +10,8 @@ export const siteConfig = {
   nav: [
     { title: "Features", href: "/features" },
     { title: "How it works", href: "/how-it-works" },
-    { title: "Use cases", href: "/use-cases" },
-    { title: "Open source", href: "/open-source" },
+    { title: "Use cases", href: "/use-cases" }
+    
   ],
   builders: [
     { handle: "cxprakash", twitter: "https://x.com/cxprakash" },
