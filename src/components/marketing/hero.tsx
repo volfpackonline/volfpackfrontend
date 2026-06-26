@@ -50,10 +50,10 @@ export function Hero() {
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <Button asChild size="lg" className="h-12 px-7 text-base">
-              <Link href="/generate">
+              <a href={siteConfig.signInUrl}>
                 <Play className="size-4" />
                 Make your first short
-              </Link>
+              </a>
             </Button>
             <Button
               asChild

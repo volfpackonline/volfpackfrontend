@@ -4,6 +4,7 @@ export const siteConfig = {
   description:
     "VolfPack turns one long video into a week of ready-to-post shorts — auto captions, vertical framing, voiceovers, and scroll-stopping hooks. No editing skills required.",
   url: "https://www.volfpack.online",
+  signInUrl: "https://app.volfpack.online/signin",
   github: "https://github.com/volfpackonline",
   ogImage: "/og.png",
   nav: [

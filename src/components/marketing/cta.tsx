@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -22,10 +21,10 @@ export function CTA() {
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button asChild size="lg" className="h-12 px-8 text-base">
-              <Link href="/generate">
+              <a href={siteConfig.signInUrl}>
                 Make your first short
                 <ArrowRight className="size-4" />
-              </Link>
+              </a>
             </Button>
             <Button
               asChild

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Building2, Clapperboard, User, Users } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Use Cases",
@@ -111,7 +111,7 @@ export default function UseCasesPage() {
 
       <div className="mt-16 text-center">
         <Button asChild size="lg" className="h-12 px-8 text-base">
-          <Link href="/generate">Start processing your first video</Link>
+          <a href={siteConfig.signInUrl}>Start processing your first video</a>
         </Button>
       </div>
     </div>
