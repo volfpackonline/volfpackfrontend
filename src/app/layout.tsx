@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Toaster } from "@/components/ui/sonner";
+import { Clarity } from "@/components/clarity";
 import { siteConfig } from "@/lib/site";
 
 const quicksand = Quicksand({
@@ -87,6 +88,7 @@ export default function RootLayout({
           <SiteFooter />
           <Toaster richColors position="top-center" />
         </ThemeProvider>
+        <Clarity />
       </body>
     </html>
   );
