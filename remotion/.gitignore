@@ -1,3 +1,6 @@
 node_modules
-out
 .cache
+
+# Ignore render output, but keep the finished MP4s so they're viewable on GitHub.
+out/*
+!out/*.mp4

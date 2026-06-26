@@ -9,6 +9,29 @@ Quicksand, rounded everything, soft shadows).
 > shorts — so when do they make those? VolfPack turns the long video they
 > _already shot_ into a week of ready-to-post shorts. **Shoot once. Post all week.**
 
+## 🎬 Rendered videos
+
+The finished MP4s live in [`out/`](out/) — click any file on GitHub to play it
+in the browser. Each is 1080×1920 (vertical), 30 fps, with music.
+
+| Video | Angle / concept | Theme |
+| ----- | --------------- | ----- |
+| [volfpack-ad.mp4](out/volfpack-ad.mp4) | Original — pain / time | Light |
+| [Goldmine.mp4](out/Goldmine.mp4) | Back-catalog goldmine | Warm |
+| [Secret.mp4](out/Secret.mp4) | Envy / "how does she post 5×?" | Light split-screen |
+| [Math.mp4](out/Math.mp4) | Volume / ROI | Dark dashboard |
+| [NotAnEditor.mp4](out/NotAnEditor.mp4) | "You're not an editor" | Dark → light |
+| [Freedom.mp4](out/Freedom.mp4) | Burnout → freedom | Night → morning |
+| [Demo.mp4](out/Demo.mp4) | Show, don't tell | Light app UI |
+| [Factory.mp4](out/Factory.mp4) | "Your shorts factory" | Light assembly line |
+| [Oddly.mp4](out/Oddly.mp4) | Oddly-satisfying, no words | Light |
+| [TierList.mp4](out/TierList.mp4) | Meme tier list | Light |
+| [TextThread.mp4](out/TextThread.mp4) | iMessage story | Light chat |
+| [Speedrun.mp4](out/Speedrun.mp4) | Any% speedrun | Dark / neon |
+| [Footage.mp4](out/Footage.mp4) | Anthropomorphized file | Warm / cute |
+| [Recipe.mp4](out/Recipe.mp4) | Cooking-show recipe | Warm |
+| [Portal.mp4](out/Portal.mp4) | Sci-fi clone machine | Dark / neon |
+
 ## Setup
 
 ```bash
