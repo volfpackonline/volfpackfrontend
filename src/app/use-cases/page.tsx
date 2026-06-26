@@ -21,7 +21,7 @@ const useCases = [
     outcomes: [
       "Process a 45-minute video into 6–10 short candidates while you sleep",
       "Channel-level voice and caption style means every clip is on-brand automatically",
-      "BYO API keys — you control costs, no vendor lock-in",
+      "Predictable pricing — no editor salaries, no surprise bills",
     ],
   },
   {
@@ -54,13 +54,13 @@ const useCases = [
     icon: Clapperboard,
     color: "bg-emerald-100 text-emerald-500",
     persona: "Privacy-first operator",
-    headline: "Run the full pipeline on your own hardware — data never leaves",
+    headline: "Keep sensitive footage private — without the manual work",
     story:
-      "You work with sensitive content or simply do not want your video archive on third-party servers. VolfPack's self-hosted Docker Compose setup runs the entire pipeline locally — Whisper for transcription, Bark for TTS, FFmpeg for assembly — with external API calls only for the providers you explicitly configure.",
+      "You work with sensitive content and can't just upload it anywhere. VolfPack processes everything in an isolated, encrypted workspace — your archive is never shared or used to train public models, and you control exactly which integrations are enabled.",
     outcomes: [
-      "Full pipeline runs entirely on a local GPU machine",
-      "API keys stay in your .env file, never sent to a cloud service",
-      "Upgrade to hosted tier later without changing your workflow",
+      "Encrypted, isolated workspace — your footage is never shared",
+      "Your content is never used to train public models",
+      "Granular control over which integrations are enabled",
     ],
   },
 ];

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Play, Star } from "lucide-react";
+import { ArrowRight, Play, Sparkles } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { CaptionPhone } from "@/components/caption-phone";
@@ -27,15 +27,13 @@ export function Hero() {
       <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-20 sm:px-6 sm:py-28 lg:grid-cols-[1.05fr_0.95fr]">
         {/* Copy */}
         <div className="flex flex-col items-start text-left">
-          <Link
-            href={siteConfig.github}
-            target="_blank"
-            rel="noreferrer"
+          <a
+            href={siteConfig.signInUrl}
             className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card/70 px-4 py-1.5 text-sm text-muted-foreground shadow-cute backdrop-blur transition-colors hover:text-foreground"
           >
-            <Star className="size-3.5 fill-amber-300 text-amber-300" />
-            100% free & open source ✨
-          </Link>
+            <Sparkles className="size-3.5 fill-amber-300 text-amber-300" />
+            Start free — no editing skills needed ✨
+          </a>
 
           <h1 className="text-balance text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
             Turn one long video into a week of{" "}

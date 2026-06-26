@@ -1,4 +1,4 @@
-import { GitHubIcon, XIcon } from "@/components/icons";
+import { XIcon } from "@/components/icons";
 import { Logo } from "@/components/logo";
 import { siteConfig } from "@/lib/site";
 
@@ -12,16 +12,6 @@ export function SiteFooter() {
             <p className="max-w-xs text-sm text-muted-foreground">
               {siteConfig.description}
             </p>
-            <a
-              href={siteConfig.github}
-              target="_blank"
-              rel="noreferrer"
-              aria-label="GitHub"
-              className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
-            >
-              <GitHubIcon className="size-4" />
-              github.com/volfpackonline
-            </a>
           </div>
 
           <div className="space-y-2">
@@ -49,8 +39,7 @@ export function SiteFooter() {
 
       <div className="border-t border-border/60 py-4">
         <p className="mx-auto max-w-6xl px-4 text-xs text-muted-foreground sm:px-6">
-          © {new Date().getFullYear()} {siteConfig.name}. Open source under the
-          MIT License.
+          © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
         </p>
       </div>
     </footer>

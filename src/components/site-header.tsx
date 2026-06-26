@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
-import { GitHubIcon } from "@/components/icons";
 import { Logo } from "@/components/logo";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { siteConfig } from "@/lib/site";
@@ -26,11 +25,6 @@ export function SiteHeader() {
         </div>
 
         <div className="flex items-center gap-1.5">
-          <Button asChild variant="ghost" size="icon" aria-label="GitHub">
-            <a href={siteConfig.github} target="_blank" rel="noreferrer">
-              <GitHubIcon className="size-5" />
-            </a>
-          </Button>
           <ThemeToggle />
           <Button asChild className="ml-1">
             <a href={siteConfig.signInUrl}>Process video</a>

@@ -38,8 +38,8 @@ const sections = [
   {
     icon: GitBranch,
     color: "bg-emerald-100 text-emerald-500",
-    title: "Provider-agnostic AI",
-    body: "Every AI step — STT, LLM, TTS, OCR — runs through a swappable adapter. Use OpenAI today, switch to a local Whisper or LiteLLM-compatible model tomorrow. Bring your own API keys or use managed credits; the pipeline stays the same.",
+    title: "Best-in-class AI, always current",
+    body: "Every step — transcription, rewriting, voice, and caption timing — runs on top-tier AI models we keep up to date for you. Nothing to wire up and no keys to juggle; you just get sharp, reliable results every time.",
   },
   {
     icon: RefreshCcw,
@@ -56,8 +56,8 @@ const sections = [
   {
     icon: Captions,
     color: "bg-rose-100 text-rose-500",
-    title: "Self-host or hosted",
-    body: "Run the full stack locally on a production PC via Docker Compose — your data and API keys never leave the machine. When your team grows, switch to the hosted tier for managed storage, a shared review queue, and team roles — same feature set, no migration.",
+    title: "Private & secure by default",
+    body: "Your footage stays yours. Everything runs in an isolated, encrypted workspace — never shared, never used to train public models — and you decide which integrations are switched on. Built for teams handling sensitive content.",
   },
 ];
 

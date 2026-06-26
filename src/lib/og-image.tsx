@@ -101,7 +101,7 @@ export function createOgImage() {
                 fill="#fbbf24"
               />
             </svg>
-            100% open source
+            Shoot once · post all week
           </div>
 
           <div style={{ display: "flex", flexDirection: "column" }}>

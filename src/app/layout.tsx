@@ -42,8 +42,8 @@ export const metadata: Metadata = {
     "video repurposing tool",
     "AI video pipeline",
     "shorts factory",
-    "open source video AI",
-    "self-host video tool",
+    "podcast to shorts",
+    "TikTok Reels Shorts maker",
     siteConfig.name,
   ],
   openGraph: {

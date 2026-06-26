@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -32,13 +33,7 @@ export function CTA() {
               variant="outline"
               className="h-12 border-violet-400/60 px-8 text-base text-violet-950 hover:bg-white/40"
             >
-              <a
-                href={siteConfig.github}
-                target="_blank"
-                rel="noreferrer"
-              >
-                View on GitHub
-              </a>
+              <Link href="/how-it-works">See how it works</Link>
             </Button>
           </div>
         </div>
